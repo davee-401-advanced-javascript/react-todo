@@ -1,29 +1,73 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-// import NavDropdown from 'react-bootstrap/Navbar';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 // import Form from 'react-bootstrap/Form';
 // import FormControl from 'react-bootstrap/FormControl';
-import Button from 'react-bootstrap/Button';
 
-/*
+import List from './components/todo/list.js'
+import SmallNav from './components/todo/nav.js'
+import Header from './components/header/header.js'
+import TodoForm from './components/todo/form.js'
+import './styles.scss';
 
-
-
-*/
 
 
 function App() {
+
+// currentitem, itemList, numberActive
+const [currentItem, setCurrentItem] = useState({});
+const [itemList, setItemList] = useState([]);
+const [numberActive, setNumberActive] = useState(0);
+
+
+//LOGIC FOR FORM*********************************************
+
+function updateCurrent(currentItem) {
+//this function just updates the current item on submit in form
+
+}
+
+
+//useEffect addToList function:
+  //listen for currentItem to change, then:
+    //push/spread currentItem to nextList
+    //axios POST currentItem to api
+    //set state: update itemList with nextList
+
+
+//useEffect on initial pageload
+  //axios GET all 
+  // if anything returned, set initial state of itemlist
+
+
+//LOGIC FOR LIST*********************************************
+
+
+function updateStatus(itemList){
+  //grabs list item
+  //PUT call to update item in API DB
+  //update itemList
+
+}
+
+function deleteItem(){
+  //user can delete todo item from list
+
+}
+
   return (
     <>
-      <Navbar bg="primary" variant="dark">
-        <Nav className="mr-auto">
-          <Nav.Link href="#home">Home</Nav.Link>
-        </Nav>
-        <Button variant="danger">Log Out</Button>
-      </Navbar>
-
+      
+      <Header />
+      <SmallNav className="testing" />
+      <Container>
+        <Row>
+          <Col><TodoForm addToList={addToList}/></Col>
+          <Col><List /></Col>
+        </Row>
+      </Container>
     </>
   );
 }
