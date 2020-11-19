@@ -13,7 +13,7 @@ function List () {
     </ul>
   );
 
-  handleItemClick = (e) => {
+  let handleItemClick = (e) => {
     //on click, grab key of listitem clicked
     //go to array[itemKey], toggle status to complete
     //send new updated array back up to app to be rerendered
