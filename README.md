@@ -8,6 +8,7 @@
 
 - [Front-End application](https://agitated-sinoussi-efbc73.netlify.app/)
 - [Back-End application- Authenticad API Server](https://davee-auth-api-server.herokuapp.com/api/v1/todo)
+- [Lab 31 Pull Request](https://github.com/ryangeddes-401-advanced-javascript/react-todo/pull/2)
 
 ## Setup
 

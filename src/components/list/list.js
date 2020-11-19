@@ -1,5 +1,7 @@
 import React from 'react';
-import ListGroup from 'react-bootstrap/ListGroup'
+import ListGroup from 'react-bootstrap/ListGroup';
+
+import './list.scss';
 
 
 function List () {
