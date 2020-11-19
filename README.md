@@ -23,7 +23,7 @@ git remote -v
 git push -f origin master
 ```
 
-Testing api : https://davee-auth-api-server.herokuapp.com/api/v1/categories
+Testing api : https://davee-auth-api-server.herokuapp.com/api/v1/todo
 
 The following routes are available:
 
@@ -38,4 +38,13 @@ api/v1/todo
 api/v2/categories
 api/v2/products
 api/v2/todo
+```
+
+```
+const todo = mongoose.Schema({
+  text: { type: String, required: true },
+  assignee: { type: String },
+  complete: { type: Boolean, default:false },
+  difficulty: { type: Number, default: 1 },
+});
 ```
