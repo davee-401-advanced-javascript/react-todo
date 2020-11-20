@@ -6,12 +6,6 @@ import './small-nav.scss';
 
 function SmallNav (props) {
 
-  const [count, setCount] = useState(0);
-
-  useEffect(()=> {
-    let count = props.itemList.length;
-    setCount(count)
-  }, [props])
 
   return(
     <>
@@ -22,7 +16,7 @@ function SmallNav (props) {
     </Nav> */}
 
     <Navbar className="small-nav" bg="dark" variant="dark">
-      <Navbar.Brand href="#home">To Do List Manager({count})</Navbar.Brand>
+      <Navbar.Brand href="#home">To Do List Manager({props.itemList.length})</Navbar.Brand>
     </Navbar>
     </>
   )

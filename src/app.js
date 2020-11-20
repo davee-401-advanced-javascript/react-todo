@@ -21,7 +21,6 @@ function App() {
   const [itemList, setItemList] = useState([]);
   // const [numberActive, setNumberActive] = useState(0);
 
-
   function updateCurrent(obj) {
     setItem(obj);
     let updatedList = [...itemList, obj];
@@ -60,8 +59,8 @@ function App() {
 
 // function deleteItem(){
 //   //user can delete todo item from list
-
 // }
+
   console.log('item:', item);
   console.log('itemList', itemList);
   return (

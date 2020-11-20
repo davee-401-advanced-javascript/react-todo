@@ -21,6 +21,7 @@ function TodoForm (props) {
   function handleSubmit(e){
     e.preventDefault();
     props.updateCurrent(formItem);
+    e.target.reset();
   }
 
 

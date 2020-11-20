@@ -29,12 +29,12 @@ function List(props) {
   //   setList(props.itemList);
   // }, [props.itemList]);
 
-  let list = props.itemList.map((item)=> (
-    <ListGroup.Item action variant='success'>
-    Assigne: {item.assignee} <br/>
-    Task: {item.text}<br/>  
-    Complete: {item.complete}<br/>  
-    Difficulty: {item.difficulty}  
+  let list = props.itemList.map((item, i)=> (
+    <ListGroup.Item action key={i} variant='success'>
+      Assigne: {item.assignee} <br/>
+      Task: {item.text}<br/>  
+      Complete: {item.complete}<br/>  
+      Difficulty: {item.difficulty}  
     </ListGroup.Item>
   ))
 
