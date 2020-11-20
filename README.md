@@ -1,13 +1,61 @@
-# Getting Started with Create React App
+# React - To Do Lab
 
-https://agitated-sinoussi-efbc73.netlify.app/
+## Author: Davee Sok & Ryan Geddes
 
-Johns Example:
-https://todo-list-manager.netlify.app/
-username: admin
+## Links and Resources:
+
+<!-- - [ci/cd](http://xyz.com) (GitHub Actions) -->
+
+- [Front-End application](https://agitated-sinoussi-efbc73.netlify.app/)
+- [Back-End application- Authenticad API Server](https://davee-auth-api-server.herokuapp.com/api/v1/todo)
+- [Lab 31 Pull Request](https://github.com/ryangeddes-401-advanced-javascript/react-todo/pull/2)
+
+## Setup
+
+### `.env` requirements:
+
+<!-- i.e.
+- `PORT` - Port Number
+- `MONGODB_URI` - URL to the running mongo instance/db -->
+
+```
+
+```
+
+### How to initialize/run this application:
+
+<!-- - e.g. `npm start` -->
+
+```
+
+```
+
+### Tests:
+
+<!-- - How to run tests?
+- Any tests of note?
+- Describe any tests that you did not complete, skipped, etc -->
+
+```
+
+```
+
+<hr>
+
+## UML:
+
+![Our UML](uml.jpg)
+
+<hr>
+
+## Our Notes:
+
+Johns Example:  
+https://todo-list-manager.netlify.app/  
+username: admin  
 password: ADMIN
 
-## Setting Up:
+### Setting Up React App:
 
 ```
 npx create-react-app APP-NAME
@@ -23,7 +71,9 @@ git remote -v
 git push -f origin master
 ```
 
-Testing api : https://davee-auth-api-server.herokuapp.com/api/v1/todo
+### Backend API used for development:
+
+https://davee-auth-api-server.herokuapp.com/api/v1/todo
 
 The following routes are available:
 

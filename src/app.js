@@ -6,10 +6,10 @@ import Col from 'react-bootstrap/Col';
 // import Form from 'react-bootstrap/Form';
 // import FormControl from 'react-bootstrap/FormControl';
 
-import List from './components/todo/list.js'
-import SmallNav from './components/todo/nav.js'
+import List from './components/list/list.js'
+import SmallNav from './components/small-nav/small-nav.js'
 import Header from './components/header/header.js'
-import TodoForm from './components/todo/form.js'
+import TodoForm from './components/form/form.js'
 import './styles.scss';
 
 
@@ -17,9 +17,9 @@ import './styles.scss';
 function App() {
 
 // currentitem, itemList, numberActive
-const [currentItem, setCurrentItem] = useState({});
-const [itemList, setItemList] = useState([]);
-const [numberActive, setNumberActive] = useState(0);
+// const [currentItem, setCurrentItem] = useState({});
+// const [itemList, setItemList] = useState([]);
+// const [numberActive, setNumberActive] = useState(0);
 
 
 //LOGIC FOR FORM*********************************************
@@ -30,11 +30,13 @@ function updateCurrent(currentItem) {
 }
 
 
-//useEffect addToList function:
+function addToList() {
   //listen for currentItem to change, then:
     //push/spread currentItem to nextList
     //axios POST currentItem to api
     //set state: update itemList with nextList
+
+}
 
 
 //useEffect on initial pageload
@@ -62,10 +64,14 @@ function deleteItem(){
       
       <Header />
       <SmallNav className="testing" />
-      <Container>
+      <Container fluid className="main">
         <Row>
-          <Col><TodoForm addToList={addToList}/></Col>
-          <Col><List /></Col>
+          <Col>
+            <TodoForm addToList={addToList}/>
+          </Col>
+          <Col>
+            <List />
+          </Col>
         </Row>
       </Container>
     </>

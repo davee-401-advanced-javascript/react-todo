@@ -3,6 +3,8 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
 
+import './header.scss';
+
 function Header () {
   return(
   <Navbar bg="primary" variant="dark">
