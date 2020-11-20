@@ -6,6 +6,7 @@ import './list.scss';
 
 function List(props) {
 
+  const [list, setList] = useState([]);
   // const ListItem = ({ value, onClick }) => <li onClick={onClick}>{value}</li>;
   // const List = ({ items, onItemClick }) => (
   //   <ul>
@@ -22,8 +23,15 @@ function List(props) {
   // };
   // const[list, setList] = useState([]);
 
+  function handleClick(e){
+    
+  }
 
-  let list = props.itemList.map((item, i)=> (
+  useEffect(() =>  {
+    setList(props.itemList);
+  }, [props.itemList]);
+
+  let renderList = list.map((item, i)=> (
     <ListGroup.Item action key={i} variant='success'>
       Assigne: {item.assignee} <br/>
       Task: {item.text}<br/>  
@@ -36,7 +44,7 @@ function List(props) {
     <>
       <ListGroup>
     
-        {list}
+        {renderList}
 
       </ListGroup>
     </>

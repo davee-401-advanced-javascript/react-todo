@@ -27,6 +27,10 @@ function App() {
     setItemList(updatedList);
   }
 
+  function updateList(array) {
+    setItemList(array);
+  }
+
   async function makePost(obj) {
     
     let jsonobj = JSON.stringify(obj);
@@ -75,7 +79,7 @@ function App() {
             <TodoForm updateCurrent={updateCurrent}/>
           </Col>
           <Col>
-            <List itemList={itemList}/>
+            <List itemList={itemList} updateList={updateList}/>
           </Col>
         </Row>
       </Container>
