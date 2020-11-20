@@ -23,12 +23,6 @@ function List(props) {
   // const[list, setList] = useState([]);
 
 
-
-  // useEffect(()=> {
-  //   console.log('From props.itemList', props.itemList);
-  //   setList(props.itemList);
-  // }, [props.itemList]);
-
   let list = props.itemList.map((item, i)=> (
     <ListGroup.Item action key={i} variant='success'>
       Assigne: {item.assignee} <br/>

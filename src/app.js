@@ -40,7 +40,9 @@ function App() {
     // console.log('post to axios console:', raw)
   }
 
-
+  useEffect(()=> {
+    document.title = `To Do List: ${itemList.length}`
+  })
   
 
 //useEffect on initial pageload
