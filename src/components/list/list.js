@@ -27,13 +27,13 @@ function List () {
   return(
     <>
   <ListGroup defaultActiveKey="#link1">
-    <ListGroup.Item action href="#link1">
+    <ListGroup.Item action variant='success'>
       Link 1
     </ListGroup.Item>
-    <ListGroup.Item action href="#link2" disabled>
+    <ListGroup.Item action variant='success'>
       Link 2
     </ListGroup.Item>
-    <ListGroup.Item action onClick={console.log('hello')}>
+    <ListGroup.Item action variant='danger' onClick={()=>console.log('hello')}>
       This one is a button
     </ListGroup.Item>
   </ListGroup>
