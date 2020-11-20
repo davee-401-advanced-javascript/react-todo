@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 // import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
 import './small-nav.scss';
 
-function SmallNav () {
+function SmallNav (props) {
+
+
   return(
     <>
     {/* <Nav defaultActiveKey="/home" as="ul">
@@ -14,7 +16,7 @@ function SmallNav () {
     </Nav> */}
 
     <Navbar className="small-nav" bg="dark" variant="dark">
-      <Navbar.Brand href="#home">To Do List Manager( )</Navbar.Brand>
+      <Navbar.Brand href="#home">To Do List Manager({props.itemList.length})</Navbar.Brand>
     </Navbar>
     </>
   )

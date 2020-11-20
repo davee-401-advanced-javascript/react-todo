@@ -21,15 +21,20 @@ function App() {
   const [itemList, setItemList] = useState([]);
   // const [numberActive, setNumberActive] = useState(0);
 
-
   function updateCurrent(obj) {
     setItem(obj);
+    let updatedList = [...itemList, obj];
+    setItemList(updatedList);
+  }
+
+  function updateList(array) {
+    setItemList(array);
   }
 
   async function makePost(obj) {
     
     let jsonobj = JSON.stringify(obj);
-    console.log('axios send obj', jsonobj)
+    // console.log('axios send obj', jsonobj)
     // let raw = await axios(
     //   {
     //     method: 'POST',
@@ -39,32 +44,10 @@ function App() {
     // console.log('post to axios console:', raw)
   }
 
-
-  // should Run only when "item" changes
-    useEffect(() => {
-      //listen for currentItem to change, then:
-      //push/spread currentItem to nextList
-      let updatedList = [...itemList, item];
-      //set state: update itemList with nextList
-      setItemList(updatedList);
-      makePost(item);
-      console.log('LINE 42 itemList:', itemList);
-      
-      //axios POST currentItem to api
-      
-      
-    }, [item]);
-
-    
-
+  useEffect(()=> {
+    document.title = `To Do List: ${itemList.length}`
+  })
   
-  
-  
-      function consolezzz(){
-    console.log('console function:',itemList)
-  }
-  consolezzz();
-
 
 //useEffect on initial pageload
   //axios GET all 
@@ -74,30 +57,29 @@ function App() {
 //LOGIC FOR LIST*********************************************
 
 
-function updateStatus(itemList){
-  //grabs list item
-  //PUT call to update item in API DB
-  //update itemList
+// function updateStatus(itemList){
+//   //grabs list item
+//   //PUT call to update item in API DB
+//   //update itemList
+// }
 
-}
+// function deleteItem(){
+//   //user can delete todo item from list
+// }
 
-function deleteItem(){
-  //user can delete todo item from list
-
-}
-
+  console.log('item:', item);
+  console.log('itemList', itemList);
   return (
     <>
-      
       <Header />
-      <SmallNav className="testing" />
+      <SmallNav itemList={itemList} />
       <Container fluid className="main">
         <Row>
           <Col>
             <TodoForm updateCurrent={updateCurrent}/>
           </Col>
           <Col>
-            <List />
+            <List itemList={itemList} updateList={updateList}/>
           </Col>
         </Row>
       </Container>
