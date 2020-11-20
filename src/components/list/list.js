@@ -31,31 +31,32 @@ function List(props) {
 
   let list = props.itemList.map((item)=> (
     <ListGroup.Item action variant='success'>
-    {item.assignee}
+    Assigne: {item.assignee} <br/>
+    Task: {item.text}<br/>  
+    Complete: {item.complete}<br/>  
+    Difficulty: {item.difficulty}  
     </ListGroup.Item>
   ))
 
   return(
     <>
-  <ListGroup defaultActiveKey="#link1">
-    {list}
+      <ListGroup>
+    
+        {list}
 
-
-    <ListGroup.Item action variant='success'>
-      Link 1
-    </ListGroup.Item>
-    <ListGroup.Item action variant='success'>
-      Link 2
-    </ListGroup.Item>
-    <ListGroup.Item action variant='danger' onClick={()=>console.log('hello')}>
-      This one is a button
-    </ListGroup.Item>
-  </ListGroup>
+      </ListGroup>
     </>
   )
-
-
 }
 
 export default List;
 
+{/* <ListGroup.Item action variant='success'>
+Link 1
+</ListGroup.Item>
+<ListGroup.Item action variant='success'>
+Link 2
+</ListGroup.Item>
+<ListGroup.Item action variant='danger' onClick={()=>console.log('hello')}>
+This one is a button
+</ListGroup.Item> */}
