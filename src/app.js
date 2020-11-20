@@ -1,4 +1,5 @@
-import React from 'react';
+import axios from 'axios';
+import React, {useState, useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -16,27 +17,53 @@ import './styles.scss';
 
 function App() {
 
-// currentitem, itemList, numberActive
-// const [currentItem, setCurrentItem] = useState({});
-// const [itemList, setItemList] = useState([]);
-// const [numberActive, setNumberActive] = useState(0);
+  const [item, setItem] = useState({});
+  const [itemList, setItemList] = useState([]);
+  // const [numberActive, setNumberActive] = useState(0);
 
 
-//LOGIC FOR FORM*********************************************
+  function updateCurrent(obj) {
+    setItem(obj);
+  }
 
-function updateCurrent(currentItem) {
-//this function just updates the current item on submit in form
+  async function makePost(obj) {
+    
+    let jsonobj = JSON.stringify(obj);
+    console.log('axios send obj', jsonobj)
+    // let raw = await axios(
+    //   {
+    //     method: 'POST',
+    //     url: 'https://davee-auth-api-server.herokuapp.com/api/v1/todo',
+    //     data: jsonobj
+    //   });
+    // console.log('post to axios console:', raw)
+  }
 
-}
 
+  // should Run only when "item" changes
+    useEffect(() => {
+      //listen for currentItem to change, then:
+      //push/spread currentItem to nextList
+      let updatedList = [...itemList, item];
+      //set state: update itemList with nextList
+      setItemList(updatedList);
+      makePost(item);
+      console.log('LINE 42 itemList:', itemList);
+      
+      //axios POST currentItem to api
+      
+      
+    }, [item]);
 
-function addToList() {
-  //listen for currentItem to change, then:
-    //push/spread currentItem to nextList
-    //axios POST currentItem to api
-    //set state: update itemList with nextList
+    
 
-}
+  
+  
+  
+      function consolezzz(){
+    console.log('console function:',itemList)
+  }
+  consolezzz();
 
 
 //useEffect on initial pageload
@@ -67,7 +94,7 @@ function deleteItem(){
       <Container fluid className="main">
         <Row>
           <Col>
-            <TodoForm addToList={addToList}/>
+            <TodoForm updateCurrent={updateCurrent}/>
           </Col>
           <Col>
             <List />
