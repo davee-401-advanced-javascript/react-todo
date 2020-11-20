@@ -1,39 +1,66 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
 
 import './form.scss';
 
-//use function passed from app in props,
-//just send it the data in state
+function TodoForm (props) {
 
-//OnSubmit(
-  //grab input form states
-  //send state to propsFunction
+  const[formItem, setFormItem] = useState({});
 
-function TodoForm () {
+  function handleChange(e) {
+    let newItem = {
+      ...formItem, 
+      [e.target.name]: e.target.value,
+      complete: false,
+      difficulty: 5
+    }
+    setFormItem(newItem);
+  }
+
+
+  function handleSubmit(e){
+    e.preventDefault();
+    props.updateCurrent(formItem);
+    e.target.reset();
+    setFormItem({})
+  }
+
   return(
-    <Form>
+    
+    <Form onSubmit={handleSubmit}>
       <h4>Add To Do Item</h4>
-      <Form.Group controlId="formBasicEmail">
+      <Form.Group onChange={handleChange} controlId="formBasicTask">
         <Form.Label>To Do Item</Form.Label>
-        <Form.Control type="text" placeholder="Enter Task" />
+        <Form.Control 
+          type="text" 
+          placeholder="Enter Task"
+          name='text' />
       </Form.Group>
 
-      <Form.Group controlId="formBasicPassword">
+      <Form.Group onChange={handleChange}controlId="formBasicName">
         <Form.Label>Assigned To</Form.Label>
-        <Form.Control type="text" placeholder="Assignee Name" />
+        <Form.Control 
+        type="text" 
+        placeholder="Assignee Name" 
+        name='assignee'
+        />
       </Form.Group>
 
-      <Form.Group controlId="formBasicRange">
+      <Form.Group onChange={handleChange}controlId="formBasicRange">
         <Form.Label>Difficulty</Form.Label>
-        <Form.Control type="range" />
+        <Form.Control
+          name='difficulty' 
+          type="range" 
+          min='1' 
+          max='10'/>
       </Form.Group>
 
       <Button variant="primary" type="submit">
         Add to List!
       </Button>
     </Form>
+
   )
 
 }
