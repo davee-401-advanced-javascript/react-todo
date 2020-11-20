@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
 
@@ -18,13 +18,11 @@ function TodoForm (props) {
     setFormItem(newItem);
   }
 
-
   function handleSubmit(e){
     e.preventDefault();
     props.updateCurrent(formItem);
-    e.target.reset();
-    setFormItem({})
   }
+
 
   return(
     
@@ -32,28 +30,32 @@ function TodoForm (props) {
       <h4>Add To Do Item</h4>
       <Form.Group onChange={handleChange} controlId="formBasicTask">
         <Form.Label>To Do Item</Form.Label>
-        <Form.Control 
+        <Form.Control
+          name='text' 
           type="text" 
           placeholder="Enter Task"
-          name='text' />
+          required
+           />
       </Form.Group>
 
-      <Form.Group onChange={handleChange}controlId="formBasicName">
+      <Form.Group onChange={handleChange} controlId="formBasicName">
         <Form.Label>Assigned To</Form.Label>
-        <Form.Control 
-        type="text" 
-        placeholder="Assignee Name" 
-        name='assignee'
+        <Form.Control
+          name='assignee' 
+          type="text" 
+          placeholder="Assignee Name"
+          required 
         />
       </Form.Group>
 
-      <Form.Group onChange={handleChange}controlId="formBasicRange">
+      <Form.Group onChange={handleChange} controlId="formBasicRange">
         <Form.Label>Difficulty</Form.Label>
         <Form.Control
           name='difficulty' 
           type="range" 
           min='1' 
-          max='10'/>
+          max='10'
+        />
       </Form.Group>
 
       <Button variant="primary" type="submit">
