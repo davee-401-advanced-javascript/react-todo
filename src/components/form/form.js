@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+// import React, {useState, useEffect} from 'react';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
 
@@ -9,16 +9,13 @@ function TodoForm (props) {
 
   const [handleSubmit, handleChange] = useForm(doneWithForm)
 
-
   function doneWithForm(formItem){
-    console.log('formItemBefore', formItem)
     formItem.complete = false;
     if(!formItem.difficulty){
       formItem.difficulty = 1;
     }
     props.updateItem(formItem);
   }
-
 
   return(
     

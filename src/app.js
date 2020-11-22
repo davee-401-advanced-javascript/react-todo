@@ -17,15 +17,12 @@ import './styles.scss';
 
 function App() {
 
-  const [item, setItem] = useState({});
   const [itemList, setItemList] = useState([]);
   // const [numberActive, setNumberActive] = useState(0);
 
   function updateItem(obj) {
-    setItem(obj);
     makePost(obj);
-    let updatedList = [...itemList, obj];
-    setItemList(updatedList);
+    getAll();
   }
 
   function updateList(array) {
@@ -48,8 +45,29 @@ function App() {
         url: 'https://davee-auth-api-server.herokuapp.com/api/v1/todo'
       });
       if(raw) {
+        // console.log('returned from api:', raw.data.results);
         setItemList(raw.data.results);
+        //write a function to update the state in list component?
       }
+  }
+
+  async function makePut(obj) {
+    let raw = await axios(
+      {
+        method: 'PUT',
+        url: 'https://davee-auth-api-server.herokuapp.com/api/v1/todo',
+        data: obj
+      });
+  }
+
+  async function makeDelete(id) {
+    let raw = await axios(
+      {
+        method: 'DELETE',
+        url: `https://davee-auth-api-server.herokuapp.com/api/v1/todo/${id}`,
+      });
+      console.log('this got deleted', raw);
+      getAll();
   }
 
   useEffect(()=> {
@@ -89,7 +107,7 @@ function App() {
             <TodoForm updateItem={updateItem}/>
           </Col>
           <Col>
-            <List itemList={itemList} updateList={updateList}/>
+            <List itemList={itemList} updateList={updateList} makeDelete={makeDelete}/>
           </Col>
         </Row>
       </Container>
