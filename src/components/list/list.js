@@ -1,12 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Toast from 'react-bootstrap/Toast'
+import Badge from 'react-bootstrap/Badge'
+import { If, Then, Else, When, Unless, Switch, Case, Default } from 'react-if';
 
 import './list.scss';
 
 
 function List(props) {
 
-  const [list, setList] = useState([]);
+  // const [list, setList] = useState([]);
   // const ListItem = ({ value, onClick }) => <li onClick={onClick}>{value}</li>;
   // const List = ({ items, onItemClick }) => (
   //   <ul>
@@ -23,21 +26,41 @@ function List(props) {
   // };
   // const[list, setList] = useState([]);
 
-  function handleClick(e){
-    
-  }
 
-  useEffect(() =>  {
-    setList(props.itemList);
-  }, [props.itemList]);
+  // useEffect(() =>  {
+  //   setList(props.itemList);
+  // }, [props.itemList]);
 
-  let renderList = list.map((item, i)=> (
-    <ListGroup.Item action key={i} variant='success'>
-      Assigne: {item.assignee} <br/>
-      Task: {item.text}<br/>  
-      Complete: {item.complete}<br/>  
-      Difficulty: {item.difficulty}  
-    </ListGroup.Item>
+
+  //function put
+
+
+  //function delete
+
+  let renderList = props.itemList.map((item)=> (
+    // if item.complete === true
+      <>
+
+      <Toast key={item._id} onClose={() => props.makeDelete(item._id)}>
+      <Toast.Header>
+        <If condition={item.complete} >
+          <Then>
+            <Badge onClick={()=> props.makePut(item)} pill variant="danger">
+              Complete
+            </Badge>
+          </Then>
+          <Else>
+            <Badge onClick={()=> props.makePut(item)} pill variant="success">
+              Pending
+            </Badge>
+          </Else>
+        </If>
+        <strong className="mr-auto">  {item.assignee}</strong>
+        <small>Difficulty: {item.difficulty}</small>
+      </Toast.Header>
+      <Toast.Body>{item.text}</Toast.Body>
+      </Toast>
+    </>
   ))
 
   return(
@@ -53,12 +76,3 @@ function List(props) {
 
 export default List;
 
-{/* <ListGroup.Item action variant='success'>
-Link 1
-</ListGroup.Item>
-<ListGroup.Item action variant='success'>
-Link 2
-</ListGroup.Item>
-<ListGroup.Item action variant='danger' onClick={()=>console.log('hello')}>
-This one is a button
-</ListGroup.Item> */}

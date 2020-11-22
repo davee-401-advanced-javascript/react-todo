@@ -17,14 +17,12 @@ import './styles.scss';
 
 function App() {
 
-  const [item, setItem] = useState({});
   const [itemList, setItemList] = useState([]);
   // const [numberActive, setNumberActive] = useState(0);
 
-  function updateCurrent(obj) {
-    setItem(obj);
-    let updatedList = [...itemList, obj];
-    setItemList(updatedList);
+  function updateItem(obj) {
+    makePost(obj);
+    getAll();
   }
 
   function updateList(array) {
@@ -32,21 +30,68 @@ function App() {
   }
 
   async function makePost(obj) {
-    
-    let jsonobj = JSON.stringify(obj);
-    // console.log('axios send obj', jsonobj)
-    // let raw = await axios(
-    //   {
-    //     method: 'POST',
-    //     url: 'https://davee-auth-api-server.herokuapp.com/api/v1/todo',
-    //     data: jsonobj
-    //   });
-    // console.log('post to axios console:', raw)
+    let raw = await axios(
+      {
+        method: 'POST',
+        url: 'https://davee-auth-api-server.herokuapp.com/api/v1/todo',
+        data: obj
+      });
+  }
+
+  async function getAll() {
+    let raw = await axios(
+      {
+        method: 'GET',
+        url: 'https://davee-auth-api-server.herokuapp.com/api/v1/todo'
+      });
+      if(raw) {
+        // console.log('returned from api:', raw.data.results);
+        setItemList(raw.data.results);
+        //write a function to update the state in list component?
+      }
+  }
+
+  // handleToggleMode = () => {
+  //   const darkMode = !this.state.darkMode;
+  //   this.setState({ darkMode });
+  // };
+
+
+  async function makePut(obj) {
+
+    if(obj.complete) {
+      obj.complete = false;
+    } else{
+      obj.complete =true
+    }
+
+    let raw = await axios(
+      {
+        method: 'PUT',
+        url: `https://davee-auth-api-server.herokuapp.com/api/v1/todo/${obj._id}`,
+        data: obj
+      });
+      console.log('this got putted', raw);
+      getAll();
+  }
+
+  async function makeDelete(id) {
+    let raw = await axios(
+      {
+        method: 'DELETE',
+        url: `https://davee-auth-api-server.herokuapp.com/api/v1/todo/${id}`,
+      });
+      console.log('this got deleted', raw);
+      getAll();
   }
 
   useEffect(()=> {
     document.title = `To Do List: ${itemList.length}`
-  })
+  }, [itemList])
+  
+  useEffect(() => {
+    getAll();
+  }, [])
   
 
 //useEffect on initial pageload
@@ -67,8 +112,6 @@ function App() {
 //   //user can delete todo item from list
 // }
 
-  console.log('item:', item);
-  console.log('itemList', itemList);
   return (
     <>
       <Header />
@@ -76,10 +119,10 @@ function App() {
       <Container fluid className="main">
         <Row>
           <Col>
-            <TodoForm updateCurrent={updateCurrent}/>
+            <TodoForm updateItem={updateItem}/>
           </Col>
           <Col>
-            <List itemList={itemList} updateList={updateList}/>
+            <List itemList={itemList} updateList={updateList} makeDelete={makeDelete} makePut={makePut}/>
           </Col>
         </Row>
       </Container>

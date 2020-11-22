@@ -1,4 +1,4 @@
-// import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
 
@@ -7,24 +7,40 @@ import useForm from '../form-hook/form-hook.js';
 
 function TodoForm (props) {
 
-  const [handleSubmit, handleChange] = useForm(doneWithForm)
+  const [handleSubmit, handleChange] = useForm(doSomething)
 
-  function doneWithForm(formItem){
-    formItem.complete = false;
-    if(!formItem.difficulty){
-      formItem.difficulty = 1;
-    }
-    props.updateItem(formItem);
+  function doSomething(data) {
+
   }
+
+  // const[formItem, setFormItem] = useState({});
+
+  function handleChange(e) {
+    let newItem = {
+      ...formItem, 
+      [e.target.name]: e.target.value,
+      //**** */
+      complete: false,
+      difficulty: 5
+    }
+    setFormItem(newItem);
+  }
+
+  function handleSubmit(e){
+    e.preventDefault();
+    props.updateItem(formItem);
+    e.target.reset();
+  }
+
+  const [handleSubmit, handleChange] = useForm()
 
   return(
     
     <Form onSubmit={handleSubmit}>
       <h4>Add To Do Item</h4>
-      <Form.Group  controlId="formBasicTask">
+      <Form.Group onChange={handleChange} controlId="formBasicTask">
         <Form.Label>To Do Item</Form.Label>
         <Form.Control
-          onChange={handleChange}
           name='text' 
           type="text" 
           placeholder="Enter Task"
@@ -32,10 +48,9 @@ function TodoForm (props) {
            />
       </Form.Group>
 
-      <Form.Group  controlId="formBasicName">
+      <Form.Group onChange={handleChange} controlId="formBasicName">
         <Form.Label>Assigned To</Form.Label>
         <Form.Control
-          onChange={handleChange}
           name='assignee' 
           type="text" 
           placeholder="Assignee Name"
@@ -43,17 +58,15 @@ function TodoForm (props) {
         />
       </Form.Group>
 
-      <Form.Group controlId="formBasicRange">
+      <Form.Group onChange={handleChange} controlId="formBasicRange">
         <Form.Label>Difficulty</Form.Label>
         <Form.Control
-          onChange={handleChange} 
           name='difficulty' 
           type="range" 
           min='1' 
           max='10'
         />
       </Form.Group>
-      
 
       <Button variant="primary" type="submit">
         Add to List!
