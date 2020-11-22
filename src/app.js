@@ -4,8 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-// import Form from 'react-bootstrap/Form';
-// import FormControl from 'react-bootstrap/FormControl';
 
 import List from './components/list/list.js'
 import SmallNav from './components/small-nav/small-nav.js'
@@ -25,9 +23,6 @@ function App() {
     getAll();
   }
 
-  function updateList(array) {
-    setItemList(array);
-  }
 
   async function makePost(obj) {
     let raw = await axios(
@@ -38,6 +33,7 @@ function App() {
       });
   }
 
+
   async function getAll() {
     let raw = await axios(
       {
@@ -45,16 +41,9 @@ function App() {
         url: 'https://davee-auth-api-server.herokuapp.com/api/v1/todo'
       });
       if(raw) {
-        // console.log('returned from api:', raw.data.results);
         setItemList(raw.data.results);
-        //write a function to update the state in list component?
       }
   }
-
-  // handleToggleMode = () => {
-  //   const darkMode = !this.state.darkMode;
-  //   this.setState({ darkMode });
-  // };
 
 
   async function makePut(obj) {
@@ -75,13 +64,13 @@ function App() {
       getAll();
   }
 
+
   async function makeDelete(id) {
     let raw = await axios(
       {
         method: 'DELETE',
         url: `https://davee-auth-api-server.herokuapp.com/api/v1/todo/${id}`,
       });
-      console.log('this got deleted', raw);
       getAll();
   }
 
@@ -94,24 +83,6 @@ function App() {
   }, [])
   
 
-//useEffect on initial pageload
-  //axios GET all 
-  // if anything returned, set initial state of itemlist
-
-
-//LOGIC FOR LIST*********************************************
-
-
-// function updateStatus(itemList){
-//   //grabs list item
-//   //PUT call to update item in API DB
-//   //update itemList
-// }
-
-// function deleteItem(){
-//   //user can delete todo item from list
-// }
-
   return (
     <>
       <Header />
@@ -122,7 +93,7 @@ function App() {
             <TodoForm updateItem={updateItem}/>
           </Col>
           <Col>
-            <List itemList={itemList} updateList={updateList} makeDelete={makeDelete} makePut={makePut}/>
+            <List itemList={itemList} makeDelete={makeDelete} makePut={makePut}/>
           </Col>
         </Row>
       </Container>
