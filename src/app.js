@@ -20,9 +20,8 @@ function App() {
 
   function updateItem(obj) {
     makePost(obj);
-    getAll();
+    
   }
-
 
   async function makePost(obj) {
     let raw = await axios(
@@ -31,6 +30,7 @@ function App() {
         url: 'https://davee-auth-api-server.herokuapp.com/api/v1/todo',
         data: obj
       });
+      getAll();
   }
 
 
