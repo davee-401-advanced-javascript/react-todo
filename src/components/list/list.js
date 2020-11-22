@@ -45,12 +45,12 @@ function List(props) {
       <Toast.Header>
         <If condition={item.complete} >
           <Then>
-            <Badge pill variant="danger">
+            <Badge onClick={()=> props.makePut(item)} pill variant="danger">
               Complete
             </Badge>
           </Then>
           <Else>
-            <Badge pill variant="success">
+            <Badge onClick={()=> props.makePut(item)} pill variant="success">
               Pending
             </Badge>
           </Else>

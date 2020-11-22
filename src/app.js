@@ -51,13 +51,28 @@ function App() {
       }
   }
 
+  // handleToggleMode = () => {
+  //   const darkMode = !this.state.darkMode;
+  //   this.setState({ darkMode });
+  // };
+
+
   async function makePut(obj) {
+
+    if(obj.complete) {
+      obj.complete = false;
+    } else{
+      obj.complete =true
+    }
+
     let raw = await axios(
       {
         method: 'PUT',
-        url: 'https://davee-auth-api-server.herokuapp.com/api/v1/todo',
+        url: `https://davee-auth-api-server.herokuapp.com/api/v1/todo/${obj._id}`,
         data: obj
       });
+      console.log('this got putted', raw);
+      getAll();
   }
 
   async function makeDelete(id) {
@@ -107,7 +122,7 @@ function App() {
             <TodoForm updateItem={updateItem}/>
           </Col>
           <Col>
-            <List itemList={itemList} updateList={updateList} makeDelete={makeDelete}/>
+            <List itemList={itemList} updateList={updateList} makeDelete={makeDelete} makePut={makePut}/>
           </Col>
         </Row>
       </Container>
