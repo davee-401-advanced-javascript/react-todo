@@ -32,12 +32,15 @@ function List(props) {
   }, [props.itemList]);
 
   let renderList = list.map((item, i)=> (
-    <ListGroup.Item action key={i} variant='success'>
+
+    // if item.complete === true
+      <ListGroup.Item action key={i} variant='success'>
       Assigne: {item.assignee} <br/>
       Task: {item.text}<br/>  
       Complete: {item.complete}<br/>  
       Difficulty: {item.difficulty}  
-    </ListGroup.Item>
+      </ListGroup.Item>
+
   ))
 
   return(

@@ -21,8 +21,9 @@ function App() {
   const [itemList, setItemList] = useState([]);
   // const [numberActive, setNumberActive] = useState(0);
 
-  function updateCurrent(obj) {
+  function updateItem(obj) {
     setItem(obj);
+    makePost(obj);
     let updatedList = [...itemList, obj];
     setItemList(updatedList);
   }
@@ -32,21 +33,32 @@ function App() {
   }
 
   async function makePost(obj) {
-    
-    let jsonobj = JSON.stringify(obj);
-    // console.log('axios send obj', jsonobj)
-    // let raw = await axios(
-    //   {
-    //     method: 'POST',
-    //     url: 'https://davee-auth-api-server.herokuapp.com/api/v1/todo',
-    //     data: jsonobj
-    //   });
-    // console.log('post to axios console:', raw)
+    let raw = await axios(
+      {
+        method: 'POST',
+        url: 'https://davee-auth-api-server.herokuapp.com/api/v1/todo',
+        data: obj
+      });
+  }
+
+  async function getAll() {
+    let raw = await axios(
+      {
+        method: 'GET',
+        url: 'https://davee-auth-api-server.herokuapp.com/api/v1/todo'
+      });
+      if(raw) {
+        setItemList(raw.data.results);
+      }
   }
 
   useEffect(()=> {
     document.title = `To Do List: ${itemList.length}`
-  })
+  }, [itemList])
+  
+  useEffect(() => {
+    getAll();
+  }, [])
   
 
 //useEffect on initial pageload
@@ -67,8 +79,6 @@ function App() {
 //   //user can delete todo item from list
 // }
 
-  console.log('item:', item);
-  console.log('itemList', itemList);
   return (
     <>
       <Header />
@@ -76,7 +86,7 @@ function App() {
       <Container fluid className="main">
         <Row>
           <Col>
-            <TodoForm updateCurrent={updateCurrent}/>
+            <TodoForm updateItem={updateItem}/>
           </Col>
           <Col>
             <List itemList={itemList} updateList={updateList}/>
