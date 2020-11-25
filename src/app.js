@@ -16,23 +16,22 @@ import './styles.scss';
 function App() {
 
   const [itemList, setItemList] = useState([]);
-  // const [numberActive, setNumberActive] = useState(0);
+  const [active, setActive] = useState(0);
 
   function updateItem(obj) {
     makePost(obj);
-    
   }
 
-  async function makePost(obj) {
-    let raw = await axios(
-      {
-        method: 'POST',
-        url: 'https://davee-auth-api-server.herokuapp.com/api/v1/todo',
-        data: obj
-      });
-      getAll();
+  function updateActive(array) {
+    let active = array.reduce((acc, item, i) => {
+      if(item.complete === false){
+        return acc + 1;
+      } else {
+        return acc;
+      }
+    }, 0);
+    setActive(active);
   }
-
 
   async function getAll() {
     let raw = await axios(
@@ -42,7 +41,19 @@ function App() {
       });
       if(raw) {
         setItemList(raw.data.results);
+        updateActive(raw.data.results);
       }
+  }
+  
+  
+  async function makePost(obj) {
+    let raw = await axios(
+      {
+        method: 'POST',
+        url: 'https://davee-auth-api-server.herokuapp.com/api/v1/todo',
+        data: obj
+      });
+      getAll();
   }
 
 
@@ -60,7 +71,6 @@ function App() {
         url: `https://davee-auth-api-server.herokuapp.com/api/v1/todo/${obj._id}`,
         data: obj
       });
-      console.log('this got putted', raw);
       getAll();
   }
 
@@ -75,9 +85,10 @@ function App() {
   }
 
   useEffect(()=> {
-    document.title = `To Do List: ${itemList.length}`
-  }, [itemList])
+    document.title = `To Do List: ${active}`
+  }, [active])
   
+
   useEffect(() => {
     getAll();
   }, [])
@@ -86,7 +97,7 @@ function App() {
   return (
     <>
       <Header />
-      <SmallNav itemList={itemList} />
+      <SmallNav active={active} />
       <Container fluid className="main">
         <Row>
           <Col>

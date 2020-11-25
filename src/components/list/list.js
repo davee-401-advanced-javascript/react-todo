@@ -6,7 +6,6 @@ import { If, Then, Else, When, Unless, Switch, Case, Default } from 'react-if';
 
 import './list.scss';
 
-
 function List(props) {
 
   let renderList = props.itemList.map((item)=> (
