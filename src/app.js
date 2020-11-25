@@ -18,9 +18,11 @@ function App() {
   const [itemList, setItemList] = useState([]);
   const [active, setActive] = useState(0);
 
+  
   function updateItem(obj) {
     makePost(obj);
   }
+
 
   function updateActive(array) {
     let active = array.reduce((acc, item, i) => {
@@ -32,6 +34,7 @@ function App() {
     }, 0);
     setActive(active);
   }
+
 
   async function getAll() {
     let raw = await axios(
@@ -83,6 +86,7 @@ function App() {
       });
       getAll();
   }
+
 
   useEffect(()=> {
     document.title = `To Do List: ${active}`
