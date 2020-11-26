@@ -5,6 +5,9 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+
+import Global from './components/context/global.js';
+
 import List from './components/list/list.js'
 import SmallNav from './components/small-nav/small-nav.js'
 import Header from './components/header/header.js'
@@ -100,18 +103,20 @@ function App() {
 
   return (
     <>
-      <Header />
-      <SmallNav active={active} />
-      <Container fluid className="main">
-        <Row>
-          <Col>
-            <TodoForm updateItem={updateItem}/>
-          </Col>
-          <Col>
-            <List itemList={itemList} makeDelete={makeDelete} makePut={makePut}/>
-          </Col>
-        </Row>
-      </Container>
+      <Global>
+        <Header />
+        <SmallNav active={active} />
+        <Container fluid className="main">
+          <Row>
+            <Col>
+              <TodoForm updateItem={updateItem}/>
+            </Col>
+            <Col>
+              <List itemList={itemList} makeDelete={makeDelete} makePut={makePut}/>
+            </Col>
+          </Row>
+        </Container>
+      </Global>
     </>
   );
 }
