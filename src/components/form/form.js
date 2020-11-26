@@ -21,6 +21,7 @@ function TodoForm (props) {
     
     <Form onSubmit={handleSubmit}>
       <h4>Add To Do Item</h4>
+      
       <Form.Group  controlId="formBasicTask">
         <Form.Label>To Do Item</Form.Label>
         <Form.Control
@@ -29,7 +30,7 @@ function TodoForm (props) {
           type="text" 
           placeholder="Enter Task"
           required
-           />
+        />
       </Form.Group>
 
       <Form.Group  controlId="formBasicName">
@@ -54,10 +55,10 @@ function TodoForm (props) {
         />
       </Form.Group>
       
-
       <Button variant="primary" type="submit">
         Add to List!
       </Button>
+
     </Form>
 
   )

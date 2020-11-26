@@ -4,8 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-// import Form from 'react-bootstrap/Form';
-// import FormControl from 'react-bootstrap/FormControl';
 
 import List from './components/list/list.js'
 import SmallNav from './components/small-nav/small-nav.js'
@@ -18,25 +16,25 @@ import './styles.scss';
 function App() {
 
   const [itemList, setItemList] = useState([]);
-  // const [numberActive, setNumberActive] = useState(0);
+  const [active, setActive] = useState(0);
 
+  
   function updateItem(obj) {
     makePost(obj);
-    getAll();
   }
 
-  function updateList(array) {
-    setItemList(array);
+
+  function updateActive(array) {
+    let active = array.reduce((acc, item, i) => {
+      if(item.complete === false){
+        return acc + 1;
+      } else {
+        return acc;
+      }
+    }, 0);
+    setActive(active);
   }
 
-  async function makePost(obj) {
-    let raw = await axios(
-      {
-        method: 'POST',
-        url: 'https://davee-auth-api-server.herokuapp.com/api/v1/todo',
-        data: obj
-      });
-  }
 
   async function getAll() {
     let raw = await axios(
@@ -45,16 +43,21 @@ function App() {
         url: 'https://davee-auth-api-server.herokuapp.com/api/v1/todo'
       });
       if(raw) {
-        // console.log('returned from api:', raw.data.results);
         setItemList(raw.data.results);
-        //write a function to update the state in list component?
+        updateActive(raw.data.results);
       }
   }
-
-  // handleToggleMode = () => {
-  //   const darkMode = !this.state.darkMode;
-  //   this.setState({ darkMode });
-  // };
+  
+  
+  async function makePost(obj) {
+    let raw = await axios(
+      {
+        method: 'POST',
+        url: 'https://davee-auth-api-server.herokuapp.com/api/v1/todo',
+        data: obj
+      });
+      getAll();
+  }
 
 
   async function makePut(obj) {
@@ -71,9 +74,9 @@ function App() {
         url: `https://davee-auth-api-server.herokuapp.com/api/v1/todo/${obj._id}`,
         data: obj
       });
-      console.log('this got putted', raw);
       getAll();
   }
+
 
   async function makeDelete(id) {
     let raw = await axios(
@@ -81,48 +84,31 @@ function App() {
         method: 'DELETE',
         url: `https://davee-auth-api-server.herokuapp.com/api/v1/todo/${id}`,
       });
-      console.log('this got deleted', raw);
       getAll();
   }
 
+
   useEffect(()=> {
-    document.title = `To Do List: ${itemList.length}`
-  }, [itemList])
+    document.title = `To Do List: ${active}`
+  }, [active])
   
+
   useEffect(() => {
     getAll();
   }, [])
   
 
-//useEffect on initial pageload
-  //axios GET all 
-  // if anything returned, set initial state of itemlist
-
-
-//LOGIC FOR LIST*********************************************
-
-
-// function updateStatus(itemList){
-//   //grabs list item
-//   //PUT call to update item in API DB
-//   //update itemList
-// }
-
-// function deleteItem(){
-//   //user can delete todo item from list
-// }
-
   return (
     <>
       <Header />
-      <SmallNav itemList={itemList} />
+      <SmallNav active={active} />
       <Container fluid className="main">
         <Row>
           <Col>
             <TodoForm updateItem={updateItem}/>
           </Col>
           <Col>
-            <List itemList={itemList} updateList={updateList} makeDelete={makeDelete} makePut={makePut}/>
+            <List itemList={itemList} makeDelete={makeDelete} makePut={makePut}/>
           </Col>
         </Row>
       </Container>

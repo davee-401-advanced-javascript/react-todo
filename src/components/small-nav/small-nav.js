@@ -8,7 +8,7 @@ function SmallNav (props) {
   return(
     <>
     <Navbar className="small-nav" bg="dark" variant="dark">
-      <Navbar.Brand href="#home">To Do List Manager({props.itemList.length})</Navbar.Brand>
+      <Navbar.Brand href="#home">To Do List Manager({props.active})</Navbar.Brand>
     </Navbar>
     </>
   )

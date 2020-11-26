@@ -6,40 +6,9 @@ import { If, Then, Else, When, Unless, Switch, Case, Default } from 'react-if';
 
 import './list.scss';
 
-
 function List(props) {
 
-  // const [list, setList] = useState([]);
-  // const ListItem = ({ value, onClick }) => <li onClick={onClick}>{value}</li>;
-  // const List = ({ items, onItemClick }) => (
-  //   <ul>
-  //     {items.map((item, i) => (
-  //       <ListItem key={i} value={item} onClick={handleItemClick} />
-  //     ))}
-  //   </ul>
-  // );
-
-  // let handleItemClick = (e) => {
-  //   //on click, grab key of listitem clicked
-  //   //go to array[itemKey], toggle status to complete
-  //   //send new updated array back up to app to be rerendered
-  // };
-  // const[list, setList] = useState([]);
-
-
-  // useEffect(() =>  {
-  //   setList(props.itemList);
-  // }, [props.itemList]);
-
-
-  //function put
-
-
-  //function delete
-
   let renderList = props.itemList.map((item)=> (
-    // if item.complete === true
-      <>
 
       <Toast key={item._id} onClose={() => props.makeDelete(item._id)}>
       <Toast.Header>
@@ -60,15 +29,13 @@ function List(props) {
       </Toast.Header>
       <Toast.Body>{item.text}</Toast.Body>
       </Toast>
-    </>
+ 
   ))
 
   return(
     <>
       <ListGroup>
-    
         {renderList}
-
       </ListGroup>
     </>
   )
