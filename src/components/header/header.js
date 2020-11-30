@@ -3,10 +3,10 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
 
-import {GlobalContext} from '../context/global.js';
+import {GlobalContext} from '../../context/global.js';
 import './header.scss';
 
-function Header () {
+function Header (props) {
 
   const globalContext = useContext(GlobalContext);
 
@@ -16,7 +16,7 @@ function Header () {
       <Nav.Link href="#home">Home</Nav.Link>
     </Nav>
     <Button variant="danger">Log Out</Button>
-  <Button variant="success" onClick={globalContext.toggleMode}>{globalContext.mode}</Button>
+    <Button variant="success" onClick={globalContext.toggleMode}>{globalContext.mode}</Button>
   </Navbar>
 
   )

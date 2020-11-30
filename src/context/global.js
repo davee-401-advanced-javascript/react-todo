@@ -6,9 +6,12 @@ function Global(props){
 
   const [mode, setMode] = useState('');
 
-  const[completed, setCompleted] = useState([])
+  const[displayCompleted, setDisplayCompleted] = useState(false);
 
   const[itemsPerScreen, setItemsPerScreen] = useState(3);
+
+  // this could be sorted by difficulty or assignee
+  const [defaultSort, setDefaultSort] = useState('difficulty');
 
   const paginationLogic = () => {
       //do we put the pagination logic here?
@@ -17,10 +20,7 @@ function Global(props){
       // If you have more than n items in the list, add a button labeled Next that will replace the list with the next n items in the list.
       // If you are past the first n items (i.e. on page 2 or higher), add a button labeled Previous that will replace the list with the previous n items in the list.
 
-
   }
-
-
 
   const toggleMode = () => {
     setMode( mode === 'dark' ? 'light' : 'dark');
@@ -31,7 +31,7 @@ function Global(props){
   }, [props.default]);
 
   return (
-    <GlobalContext.Provider value={{mode, toggleMode}}>
+    <GlobalContext.Provider value={{mode, toggleMode, itemsPerScreen, defaultSort}}>
       {props.children}
     </GlobalContext.Provider>
   )

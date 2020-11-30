@@ -1,12 +1,13 @@
 import axios from 'axios';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 
-import Global from './components/context/global.js';
+import Global from './context/global.js';
+
 
 import List from './components/list/list.js'
 import SmallNav from './components/small-nav/small-nav.js'
@@ -103,7 +104,7 @@ function App() {
 
   return (
     <>
-      <Global>
+      <Global default='dark'>
         <Header />
         <SmallNav active={active} />
         <Container fluid className="main">
