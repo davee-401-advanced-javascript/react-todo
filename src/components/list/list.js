@@ -101,6 +101,7 @@ function List(props) {
         <li class="page-item" ><a class="page-link" href="#" onClick={()=> pageClick(value+1)}>{value+1}</a></li>
         // <LiElement value={i}/>
       ));
+      
     };
 
 
