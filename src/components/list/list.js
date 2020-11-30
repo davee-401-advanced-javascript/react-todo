@@ -4,22 +4,16 @@ import Pagination from 'react-bootstrap/Pagination';
 import Toast from 'react-bootstrap/Toast'
 import Badge from 'react-bootstrap/Badge'
 import { If, Then, Else, When, Unless, Switch, Case, Default } from 'react-if';
-
 import {GlobalContext} from '../../context/global.js';
-
 import './list.scss';
-
 function List(props) {
-
   /* Davee's Pseudo code
   -declare states to use:
     [page, setPage]
     [pageArray, setPageArray]
-
   useEffect >> on page load
     -On page load we will have access to itemList
     -On page load we will also have access to global settings: defaultSort, itemsPerScreen, displayCompleted
-
     - Manipulate itemList so we can use it according to settings
       - Based on defaultSort, sort itemlist
       then, 
@@ -27,33 +21,26 @@ function List(props) {
         - Set this into pageArray??
       - Based on displayCompleted, use When statement to display if true
   */
-
-
   const globalContext = useContext(GlobalContext);
-
   const [page, setPage] = useState(1);
   const [tempArray, setTempArray] = useState([])
-
+  const [buttonListArray, setButtonListArray] = useState([])
   useEffect ( () => {
     let initial = itemPagina(props.itemList, page)
     setTempArray(initial);
   },[]);
-
   useEffect ( () => {
     let clickedPage = itemPagina(props.itemList, page)
     setTempArray(clickedPage);
   },[page]);
-
   function itemPagina(objArr, page){
     let itemPerPage = 3;
-    let tempArr = props.itemList.slice((page*itemPerPage)-3, page*itemPerPage);
+    let tempArr = objArr.slice((page*itemPerPage)-3, page*itemPerPage);
     return(tempArr);
   };
-
   function pageClick(pageClicked){
    setPage(pageClicked);
   }
-
   let renderList = tempArray.map((item)=> (
       <>
       <Toast key={item._id} onClose={() => props.makeDelete(item._id)}>
@@ -75,51 +62,41 @@ function List(props) {
       </Toast.Header>
       <Toast.Body>{item.text}</Toast.Body>
       </Toast>
-      
     </>
   ))
-
+  useEffect ( () => {
+    let length = props.itemList.length;
+    let iterator = Math.ceil(length/3);
+    let result = [];
+    for(let i = 1; i <= iterator; i++){
+      console.log('this ran');
+      result.push(i);
+    }
+    setButtonListArray(result);
+  },[]);
   let LiElement = ({value}) => (
-    <li class="page-item" ><a class="page-link" href="#" onClick={()=> pageClick(value+1)}>{value+1}</a></li>
+    <li class="page-item" ><a class="page-link" href="#" onClick={()=> pageClick(value)}>{value}</a></li>
   )
-
-
-    let ButtonList = ({array})=> {
-      console.log('array from 86:', array);
-      let length = array.length;
-      let iterator = Math.ceil(length/3);
-
-      let result = [];
-      for(let i = 0; i <= iterator; i++){
-        console.log('this ran');
-        result.push(i);
-        //result.push(<LiElement value={i}/>)
-        // return <li class="page-item" ><a class="page-link" href="#" onClick={()=> pageClick(i+1)}>{i+1}</a></li>        
-      }
-      result.map((value, i) => (
-
-        <li class="page-item" ><a class="page-link" href="#" onClick={()=> pageClick(value+1)}>{value+1}</a></li>
-        // <LiElement value={i}/>
-      ));
-      
-    };
-
-
+      //<li class="page-item" ><a class="page-link" href="#" onClick={()=> pageClick(value+1)}>{value+1}</a></li>
+    const ButtonList = ({array})=> (
+      <>
+      {array.map((value, i) => (
+        <LiElement value={i+1}/>
+      ))} 
+      </>
+    );
   // const List = ({ itemArray }) => (
   //   <ul>
-      
   //     itemArray.map((item, i) => (
   //       <ListItem key={mongo.dbkey} value={item} />
   //     ))}
-
   //   </ul>
   // );
-
   let renderButtons = (
     <nav aria-label="Page navigation example">
     <ul class="pagination">
       <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-      <ButtonList array={props.itemList} />
+      <ButtonList array={buttonListArray} />
 {/* 
       <li class="page-item" ><a class="page-link" href="#" onClick={()=> pageClick(1)}>1</a></li>
       <li class="page-item" ><a class="page-link" href="#" onClick={()=> pageClick(2)}>2</a></li>
@@ -129,8 +106,6 @@ function List(props) {
     </ul>
   </nav>
   )
-
-
   return(
     <>
       <ListGroup>
@@ -139,18 +114,9 @@ function List(props) {
       </ListGroup>
     </>
   )
-
 }
-
-
-
 export default List;
-
-
-
-
 // const ListItem = ({ value }) => <li>{value}</li>;
-
 // const List = ({ items }) => (
 //   <ul>
 //     {items.map((item, i) => (
@@ -158,4 +124,3 @@ export default List;
 //     ))}
 //   </ul>
 // );
-
