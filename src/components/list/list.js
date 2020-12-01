@@ -1,46 +1,54 @@
 import React, {useState, useEffect, useContext} from 'react';
 import ListGroup from 'react-bootstrap/ListGroup';
-import Pagination from 'react-bootstrap/Pagination';
 import Toast from 'react-bootstrap/Toast'
 import Badge from 'react-bootstrap/Badge'
 import { If, Then, Else, When, Unless, Switch, Case, Default } from 'react-if';
 import {GlobalContext} from '../../context/global.js';
 import './list.scss';
 function List(props) {
-  /* Davee's Pseudo code
-  -declare states to use:
-    [page, setPage]
-    [pageArray, setPageArray]
-  useEffect >> on page load
-    -On page load we will have access to itemList
-    -On page load we will also have access to global settings: defaultSort, itemsPerScreen, displayCompleted
-    - Manipulate itemList so we can use it according to settings
-      - Based on defaultSort, sort itemlist
-      then, 
-      - Based on itemsPerScreen, break items into array of arrays 
-        - Set this into pageArray??
-      - Based on displayCompleted, use When statement to display if true
-  */
+
   const globalContext = useContext(GlobalContext);
+
   const [page, setPage] = useState(1);
   const [tempArray, setTempArray] = useState([])
   const [buttonListArray, setButtonListArray] = useState([])
+
+
   useEffect ( () => {
     let initial = itemPagina(props.itemList, page)
     setTempArray(initial);
   },[]);
+
+
   useEffect ( () => {
     let clickedPage = itemPagina(props.itemList, page)
     setTempArray(clickedPage);
   },[page]);
+
+
+  useEffect ( () => {
+    let length = props.itemList.length;
+    let iterator = Math.ceil(length/3);
+    let result = [];
+    for(let i = 1; i <= iterator; i++){
+      result.push(i);
+    }
+    setButtonListArray(result);
+  },[]);
+
+
   function itemPagina(objArr, page){
     let itemPerPage = 3;
     let tempArr = objArr.slice((page*itemPerPage)-3, page*itemPerPage);
     return(tempArr);
   };
+
+
   function pageClick(pageClicked){
    setPage(pageClicked);
   }
+
+
   let renderList = tempArray.map((item)=> (
       <>
       <Toast key={item._id} onClose={() => props.makeDelete(item._id)}>
@@ -64,48 +72,36 @@ function List(props) {
       </Toast>
     </>
   ))
-  useEffect ( () => {
-    let length = props.itemList.length;
-    let iterator = Math.ceil(length/3);
-    let result = [];
-    for(let i = 1; i <= iterator; i++){
-      console.log('this ran');
-      result.push(i);
-    }
-    setButtonListArray(result);
-  },[]);
+
+
   let LiElement = ({value}) => (
     <li class="page-item" ><a class="page-link" href="#" onClick={()=> pageClick(value)}>{value}</a></li>
   )
-      //<li class="page-item" ><a class="page-link" href="#" onClick={()=> pageClick(value+1)}>{value+1}</a></li>
-    const ButtonList = ({array})=> (
-      <>
+
+  const ButtonList = ({array})=> (
+    <>
       {array.map((value, i) => (
         <LiElement value={i+1}/>
+        
+        
       ))} 
-      </>
-    );
-  // const List = ({ itemArray }) => (
-  //   <ul>
-  //     itemArray.map((item, i) => (
-  //       <ListItem key={mongo.dbkey} value={item} />
-  //     ))}
-  //   </ul>
-  // );
+    </>
+  );
+
+
   let renderButtons = (
     <nav aria-label="Page navigation example">
     <ul class="pagination">
       <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+
       <ButtonList array={buttonListArray} />
-{/* 
-      <li class="page-item" ><a class="page-link" href="#" onClick={()=> pageClick(1)}>1</a></li>
-      <li class="page-item" ><a class="page-link" href="#" onClick={()=> pageClick(2)}>2</a></li>
-      <li class="page-item" ><a class="page-link" href="#" onClick={()=> pageClick(3)}>3</a></li>
-       */}
+
       <li class="page-item"><a class="page-link" href="#">Next</a></li>
     </ul>
   </nav>
   )
+
+
   return(
     <>
       <ListGroup>
@@ -115,12 +111,6 @@ function List(props) {
     </>
   )
 }
+
+
 export default List;
-// const ListItem = ({ value }) => <li>{value}</li>;
-// const List = ({ items }) => (
-//   <ul>
-//     {items.map((item, i) => (
-//       <ListItem key={mongo.dbkey} value={item} />
-//     ))}
-//   </ul>
-// );
