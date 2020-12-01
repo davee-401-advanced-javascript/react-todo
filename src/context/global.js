@@ -11,7 +11,7 @@ function Global(props){
   const[itemsPerScreen, setItemsPerScreen] = useState(3);
 
   // this could be sorted by difficulty or assignee
-  const [defaultSort, setDefaultSort] = useState('difficulty');
+  const [defaultSort, setDefaultSort] = useState('assignee');
 
 
   const toggleMode = () => {

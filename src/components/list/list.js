@@ -25,7 +25,7 @@ function List(props) {
 
   useEffect ( () => {
     let length = props.itemList.length;
-    let iterator = Math.ceil(length/3);
+    let iterator = Math.ceil(length/globalContext.itemsPerScreen);
     let result = [];
     for(let i = 1; i <= iterator; i++){
       result.push(i);
@@ -40,8 +40,8 @@ function List(props) {
 
 
   function itemPagina(objArr, page){
-    let itemPerPage = 3;
-    let tempArr = objArr.slice((page*itemPerPage)-3, page*itemPerPage);
+    let itemPerPage = globalContext.itemsPerScreen;
+    let tempArr = objArr.slice((page*itemPerPage)-globalContext.itemsPerScreen, page*itemPerPage);
     return(tempArr);
   };
 

@@ -37,6 +37,30 @@ function Todo() {
   }
 
 
+  function sortHelper(array) {
+    if(globalContext.defaultSort === 'difficulty'){
+      array.sort((a,b) => {
+        return a.difficulty - b.difficulty;
+      })
+    } else {
+      array.sort((a,b) => {
+        var nameA = a.assignee.toUpperCase();
+        var nameB = b.assignee.toUpperCase();
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      });
+    }
+    return array;
+  }
+
+
+
+
   async function getAll() {
     let raw = await axios(
       {
@@ -44,9 +68,11 @@ function Todo() {
         url: 'https://davee-auth-api-server.herokuapp.com/api/v1/todo'
       });
       if(raw) {
-        /// sort here
-        setItemList(raw.data.results);
-        updateActive(raw.data.results);
+
+        let sorter = sortHelper(raw.data.results);
+        
+        setItemList(sorter);
+        updateActive(sorter);
       }
   }
   
