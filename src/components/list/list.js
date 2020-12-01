@@ -18,12 +18,10 @@ function List(props) {
   const [tempArray, setTempArray] = useState([])
   const [buttonListArray, setButtonListArray] = useState([])
 
-
   useEffect ( () => {
     let initial = itemPagina(props.itemList, page)
     setTempArray(initial);
-  },[]);
-
+  },[props.itemList]);
 
   useEffect ( () => {
     let length = props.itemList.length;
@@ -33,14 +31,12 @@ function List(props) {
       result.push(i);
     }
     setButtonListArray(result);
-  },[]);
-
+  },[props.itemList]);
 
   useEffect ( () => {
     let clickedPage = itemPagina(props.itemList, page)
     setTempArray(clickedPage);
   },[page]);
-
 
 
   function itemPagina(objArr, page){
