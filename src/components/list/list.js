@@ -1,10 +1,15 @@
 import React, {useState, useEffect, useContext} from 'react';
+import { If, Then, Else, When, Unless, Switch, Case, Default } from 'react-if';
+
 import ListGroup from 'react-bootstrap/ListGroup';
 import Toast from 'react-bootstrap/Toast'
 import Badge from 'react-bootstrap/Badge'
-import { If, Then, Else, When, Unless, Switch, Case, Default } from 'react-if';
+import Pagination from 'react-bootstrap/Pagination';
+
 import {GlobalContext} from '../../context/global.js';
 import './list.scss';
+
+
 function List(props) {
 
   const globalContext = useContext(GlobalContext);
@@ -21,12 +26,6 @@ function List(props) {
 
 
   useEffect ( () => {
-    let clickedPage = itemPagina(props.itemList, page)
-    setTempArray(clickedPage);
-  },[page]);
-
-
-  useEffect ( () => {
     let length = props.itemList.length;
     let iterator = Math.ceil(length/3);
     let result = [];
@@ -35,6 +34,13 @@ function List(props) {
     }
     setButtonListArray(result);
   },[]);
+
+
+  useEffect ( () => {
+    let clickedPage = itemPagina(props.itemList, page)
+    setTempArray(clickedPage);
+  },[page]);
+
 
 
   function itemPagina(objArr, page){
@@ -74,7 +80,7 @@ function List(props) {
   ))
 
 
-  /*
+  
   let LiElement = ({value}) => (
     <li class="page-item" ><a class="page-link" href="#" onClick={()=> pageClick(value)}>{value}</a></li>
   )
@@ -86,22 +92,18 @@ function List(props) {
       ))} 
     </>
   );
-  */
-
-
-  ////   This is the refactor from the code above 
-  const buttonList = buttonListArray.map((value, i) => (
-    <li class="page-item" ><a class="page-link" href="#" onClick={()=> pageClick(i+1)}>{i+1}</a></li>
-  ))     
-
   
+
   let renderButtons = (
     <nav aria-label="Page navigation example">
     <ul class="pagination">
       <li class="page-item"><a class="page-link" href="#">Previous</a></li>
 
-      {/* <ButtonList array={buttonListArray} /> */}
-      {buttonList}
+      <ButtonList array={buttonListArray} />
+
+      {/* {buttonListArray.map((value) => (
+          <li class="page-item" ><a class="page-link" href="#" onClick={()=> pageClick(value)}>{value}</a></li>
+      ))} */}
 
       <li class="page-item"><a class="page-link" href="#">Next</a></li>
     </ul>
@@ -109,12 +111,30 @@ function List(props) {
   )
 
 
+
+  // let paginationButtons = (
+  //   <>
+  //     <Pagination>
+  //       <Pagination.Item key='previous' > Previous </Pagination.Item>
+  //       {
+  //         buttonListArray.map((value) => (
+  //           <Pagination.Item key={value} onClick={()=> pageClick(value)}>
+  //             {value}
+  //           </Pagination.Item>
+  //         ))
+  //       }
+  //       <Pagination.Item key='next' > Next </Pagination.Item>
+  //     </Pagination>
+  //   </>
+  // )
+
   return(
     <>
       <ListGroup>
         {renderList}
         {renderButtons}
       </ListGroup>
+      {/* {paginationButtons} */}
     </>
   )
 }
