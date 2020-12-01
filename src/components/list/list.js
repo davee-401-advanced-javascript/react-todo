@@ -80,36 +80,19 @@ function List(props) {
   ))
 
 
-  
-  let LiElement = ({value}) => (
-    <li class="page-item" ><a class="page-link" href="#" onClick={()=> pageClick(value)}>{value}</a></li>
-  )
-
-  const ButtonList = ({array})=> (
-    <>
-      {array.map((value, i) => (
-        <LiElement value={i+1}/>
-      ))} 
-    </>
-  );
-  
-
   let renderButtons = (
     <nav aria-label="Page navigation example">
     <ul class="pagination">
       <li class="page-item"><a class="page-link" href="#">Previous</a></li>
 
-      <ButtonList array={buttonListArray} />
-
-      {/* {buttonListArray.map((value) => (
+      {buttonListArray.map((value) => (
           <li class="page-item" ><a class="page-link" href="#" onClick={()=> pageClick(value)}>{value}</a></li>
-      ))} */}
+      ))} 
 
       <li class="page-item"><a class="page-link" href="#">Next</a></li>
     </ul>
   </nav>
   )
-
 
 
   // let paginationButtons = (
