@@ -6,7 +6,7 @@ function Global(props){
 
   const [mode, setMode] = useState('');
 
-  const[displayCompleted, setDisplayCompleted] = useState(false);
+  const[displayCompleted, setDisplayCompleted] = useState(true);
 
   const[itemsPerScreen, setItemsPerScreen] = useState(3);
 

@@ -55,10 +55,13 @@ function Todo() {
         return 0;
       });
     }
+
+    // if(globalContext.displayCompleted === false) {
+    //   array = array.filter( obj => obj.complete === false);
+    // }
+
     return array;
   }
-
-
 
 
   async function getAll() {
@@ -68,9 +71,7 @@ function Todo() {
         url: 'https://davee-auth-api-server.herokuapp.com/api/v1/todo'
       });
       if(raw) {
-
         let sorter = sortHelper(raw.data.results);
-        
         setItemList(sorter);
         updateActive(sorter);
       }
