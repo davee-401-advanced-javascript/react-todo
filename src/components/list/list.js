@@ -6,6 +6,7 @@ import Toast from 'react-bootstrap/Toast'
 import Badge from 'react-bootstrap/Badge'
 import Pagination from 'react-bootstrap/Pagination';
 import Collapse from 'react-bootstrap/Collapse'
+import Auth from '../../context/auth/auth.js'
 
 import {GlobalContext} from '../../context/global.js';
 
@@ -59,14 +60,18 @@ function List(props) {
       <Toast.Header>
         <If condition={item.complete} >
           <Then>
-            <Badge onClick={()=> props.makePut(item)} pill variant="danger">
-              Complete
-            </Badge>
+          <Auth capability="update">
+              <Badge onClick={()=> props.makePut(item)} pill variant="danger">
+                Complete
+              </Badge>
+          </Auth> 
           </Then>
           <Else>
-            <Badge  onClick={()=> props.makePut(item)} pill variant="success">
-              Pending
-            </Badge>
+            <Auth capability="update">
+              <Badge  onClick={()=> props.makePut(item)} pill variant="success">
+                Pending
+              </Badge>
+            </Auth> 
           </Else>
         </If>
         <strong className="mr-auto">  {item.assignee}</strong>
