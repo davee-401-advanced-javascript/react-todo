@@ -55,8 +55,9 @@ function List(props) {
 
   let renderList = tempArray.map((item)=> (
       <>
-      <Toast className="rounded mr-2" key={item._id} onClose={() => props.makeDelete(item._id)}>
       
+      <Toast className="rounded mr-2" key={item._id} onClose={() => props.makeDelete(item._id)}>
+     
       <Toast.Header>
         <If condition={item.complete} >
           <Then>
@@ -81,6 +82,7 @@ function List(props) {
           {item.text}
         </Toast.Body>
       </Toast>
+      
     </>
   ))
 

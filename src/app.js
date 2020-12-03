@@ -7,6 +7,8 @@ import Todo from './components/todo/todo.js';
 import SettingsPage from './components/settings.js';
 import LogInContext from './context/auth/context.js'
 import Header from './components/header/header.js'
+import Auth from './context/auth/auth.js'
+import SignUp from './components/signup/signup.js'
 
 
 function App() {
@@ -20,7 +22,10 @@ function App() {
               <SettingsPage />
             </Route>
             <Route exact path="/">
-              <Todo/>
+              <SignUp />
+              <Auth capability="read">
+                <Todo/>
+              </Auth>
             </Route>
         </Router>
       </LogInContext>
