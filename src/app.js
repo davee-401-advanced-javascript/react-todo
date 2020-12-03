@@ -3,12 +3,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router,Route,} from "react-router-dom";
 
 import GlobalContext from './context/global.js';
-import Todo from './todo.js';
-import Settings from './settings.js';
+import Todo from './components/todo/todo.js';
+import Settings from './components/settings.js';
 
 import Header from './components/header/header.js'
 
-import './styles.scss';
 
 function App() {
 

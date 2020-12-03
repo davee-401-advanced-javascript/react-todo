@@ -5,12 +5,12 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import {GlobalContext} from './context/global.js';
+import {GlobalContext} from '../../context/global.js';
 
-import List from './components/list/list.js'
-import SmallNav from './components/small-nav/small-nav.js'
+import List from '../list/list.js'
+import SmallNav from '../small-nav/small-nav.js'
 
-import TodoForm from './components/form/form.js'
+import TodoForm from '../form/form.js'
 import './styles.scss';
 
 

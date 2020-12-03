@@ -1,7 +1,7 @@
 import React, {useContext}  from 'react';
 import Form from 'react-bootstrap/Form'
 
-import {GlobalContext} from './context/global.js'
+import {GlobalContext} from '../context/global.js'
 
 function About(){
 
