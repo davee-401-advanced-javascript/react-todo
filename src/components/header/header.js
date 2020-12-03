@@ -3,6 +3,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
 
+import LogIn from '../../context/auth/login.js'
 import {GlobalContext} from '../../context/global.js';
 
 function Header (props) {
@@ -14,8 +15,9 @@ function Header (props) {
     <Nav className="mr-auto">
       <Nav.Link href="#home">Home</Nav.Link>
     </Nav>
-    <Button variant="danger">Log Out</Button>
-    <Button variant="success" onClick={globalContext.toggleMode}>{globalContext.mode}</Button>
+    <LogIn />
+    {/* <Button variant="danger">Log Out</Button> */}
+    {/* <Button variant="success" onClick={globalContext.toggleMode}>{globalContext.mode}</Button> */}
   </Navbar>
 
   )
