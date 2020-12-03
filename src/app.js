@@ -4,7 +4,7 @@ import {BrowserRouter as Router,Route,} from "react-router-dom";
 
 import GlobalContext from './context/global.js';
 import Todo from './todo.js';
-import About from './about.js';
+import Settings from './settings.js';
 
 import Header from './components/header/header.js'
 
@@ -17,7 +17,7 @@ function App() {
       <GlobalContext>
         <Header />
         <Route exact path="/about">
-          <About />
+          <Settings />
         </Route>
         <Route exact path="/">
           <Todo/>

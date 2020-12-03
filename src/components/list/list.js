@@ -5,9 +5,10 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Toast from 'react-bootstrap/Toast'
 import Badge from 'react-bootstrap/Badge'
 import Pagination from 'react-bootstrap/Pagination';
+import Collapse from 'react-bootstrap/Collapse'
 
 import {GlobalContext} from '../../context/global.js';
-import './list.scss';
+
 
 
 function List(props) {
@@ -53,7 +54,8 @@ function List(props) {
 
   let renderList = tempArray.map((item)=> (
       <>
-      <Toast key={item._id} onClose={() => props.makeDelete(item._id)}>
+      <Toast className="rounded mr-2" key={item._id} onClose={() => props.makeDelete(item._id)}>
+      
       <Toast.Header>
         <If condition={item.complete} >
           <Then>
@@ -62,7 +64,7 @@ function List(props) {
             </Badge>
           </Then>
           <Else>
-            <Badge onClick={()=> props.makePut(item)} pill variant="success">
+            <Badge  onClick={()=> props.makePut(item)} pill variant="success">
               Pending
             </Badge>
           </Else>
@@ -70,7 +72,9 @@ function List(props) {
         <strong className="mr-auto">  {item.assignee}</strong>
         <small>Difficulty: {item.difficulty}</small>
       </Toast.Header>
-      <Toast.Body>{item.text}</Toast.Body>
+        <Toast.Body >
+          {item.text}
+        </Toast.Body>
       </Toast>
     </>
   ))

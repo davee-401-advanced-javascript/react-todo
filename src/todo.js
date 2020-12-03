@@ -56,9 +56,9 @@ function Todo() {
       });
     }
 
-    // if(globalContext.displayCompleted === false) {
-    //   array = array.filter( obj => obj.complete === false);
-    // }
+    if(globalContext.displayCompleted === false) {
+      array = array.filter( obj => obj.complete === false);
+    }
 
     return array;
   }

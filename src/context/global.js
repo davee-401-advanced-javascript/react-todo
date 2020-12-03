@@ -14,6 +14,11 @@ function Global(props){
   const [defaultSort, setDefaultSort] = useState('assignee');
 
 
+  function changePagination(){
+    setItemsPerScreen('new number')
+  };
+
+
   const toggleMode = () => {
     setMode( mode === 'dark' ? 'light' : 'dark');
   }
