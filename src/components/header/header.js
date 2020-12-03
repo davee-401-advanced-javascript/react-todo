@@ -4,7 +4,6 @@ import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
 
 import {GlobalContext} from '../../context/global.js';
-import './header.scss';
 
 function Header (props) {
 
