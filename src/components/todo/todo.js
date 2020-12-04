@@ -11,7 +11,7 @@ import List from '../list/list.js'
 import SmallNav from '../small-nav/small-nav.js'
 
 import TodoForm from '../form/form.js'
-import './styles.scss';
+import './todo.scss';
 
 
 function Todo() {
