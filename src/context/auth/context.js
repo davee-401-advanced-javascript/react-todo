@@ -27,6 +27,23 @@ function LoginProvider(props) {
 
   }
 
+  const signUp = async(input) => {
+
+    const API = process.env.REACT_APP_API;
+
+    try{
+      const response = await superagent.post(`${API}/signup`).send(input);
+
+    
+      console.log('A user was created:', response.body)
+      login(input);
+      console.log('now logged in');
+
+    } catch(e) {
+      console.warn('Something Bad Happened. Error in Signing Up')
+    }
+  }
+
   const validateToken = (token) => {
 
     try {
@@ -56,7 +73,7 @@ function LoginProvider(props) {
 
   return (
     <LoginContext.Provider
-      value={ {isLoggedIn, user, login, logout} }
+      value={ {isLoggedIn, user, login, logout, signUp} }
     >
       {props.children}
     </LoginContext.Provider>

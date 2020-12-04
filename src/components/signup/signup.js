@@ -18,7 +18,7 @@ function SignUp (props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    userContext.login(user);
+    userContext.signUp(user);
   }
 
   const handleChange = (e) => {

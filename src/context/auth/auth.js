@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 
 import {LoginContext} from './context.js';
 import {When} from 'react-if';
-import Login from './login.js';
+// import Login from './login.js';
 
 function Auth(props) {
 
@@ -12,8 +12,8 @@ function Auth(props) {
 
   try {
     // canDo == if we asked for a capability AND user can do it
-    console.log('user capabilities', loginContext.user);
-    console.log('loggedincontext', loginContext.isLoggedIn);
+    // console.log('user capabilities', loginContext.user);
+    // console.log('loggedincontext', loginContext.isLoggedIn);
     let canDo = props.capability
       ? loginContext.user.permissions.includes(props.capability)
       : true;
