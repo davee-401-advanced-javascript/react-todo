@@ -8,6 +8,7 @@ import Badge from 'react-bootstrap/Badge'
 import Collapse from 'react-bootstrap/Collapse'
 import Auth from '../../context/auth/auth.js'
 
+import {LoginContext} from '../../context/auth/context.js';
 import {SettingsContext} from '../../context/settings-context.js';
 
 
@@ -15,6 +16,7 @@ import {SettingsContext} from '../../context/settings-context.js';
 function List(props) {
 
   const settingsContext = useContext(SettingsContext);
+  const userContext = useContext(LoginContext);
 
   const [page, setPage] = useState(1);
   const [tempArray, setTempArray] = useState([])
@@ -52,13 +54,16 @@ function List(props) {
    setPage(pageClicked);
   }
 
+  function canDelete(user) {
+     return user.permissions.includes("delete ")
+  }
 
   let renderList = tempArray.map((item)=> (
       <>
       
       <Toast className="rounded mr-2" key={item._id} onClose={() => props.makeDelete(item._id)}>
      
-      <Toast.Header>
+      <Toast.Header closeButton={canDelete(userContext.user)}>
         <If condition={item.complete} >
           <Then>
           <Auth capability="update">
@@ -78,9 +83,11 @@ function List(props) {
         <strong className="mr-auto">  {item.assignee}</strong>
         <small>Difficulty: {item.difficulty}</small>
       </Toast.Header>
+        <Collapse in={item.complete}>
         <Toast.Body >
           {item.text}
         </Toast.Body>
+        </Collapse> 
       </Toast>
       
     </>

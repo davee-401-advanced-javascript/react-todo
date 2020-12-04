@@ -34,8 +34,7 @@ function LoginProvider(props) {
     try{
       const response = await superagent.post(`${API}/signup`).send(input);
 
-    
-      console.log('A user was created:', response.body)
+
       login(input);
       console.log('now logged in');
 
@@ -50,6 +49,7 @@ function LoginProvider(props) {
       let tokenUser = jwt.verify(token, process.env.REACT_APP_SECRET)
       // if we're here, the token was good
       setIsLoggedIn(true);
+      console.log('tokenUser', tokenUser);
       setUser(tokenUser)
       cookie.save('auth', token);
       // set a cookie so that we can stay logged in
@@ -60,6 +60,8 @@ function LoginProvider(props) {
       console.warn("Token Validation Error");
     }
   }
+
+
 
   const logout = () => {
     setIsLoggedIn(false);
