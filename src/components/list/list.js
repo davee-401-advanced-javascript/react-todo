@@ -4,16 +4,19 @@ import { If, Then, Else, When, Unless, Switch, Case, Default } from 'react-if';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Toast from 'react-bootstrap/Toast'
 import Badge from 'react-bootstrap/Badge'
-import Pagination from 'react-bootstrap/Pagination';
+// import Pagination from 'react-bootstrap/Pagination';
 import Collapse from 'react-bootstrap/Collapse'
+import Auth from '../../context/auth/auth.js'
 
-import {GlobalContext} from '../../context/global.js';
+import {LoginContext} from '../../context/auth/context.js';
+import {SettingsContext} from '../../context/settings-context.js';
 
 
 
 function List(props) {
 
-  const globalContext = useContext(GlobalContext);
+  const settingsContext = useContext(SettingsContext);
+  const userContext = useContext(LoginContext);
 
   const [page, setPage] = useState(1);
   const [tempArray, setTempArray] = useState([])
@@ -26,7 +29,7 @@ function List(props) {
 
   useEffect ( () => {
     let length = props.itemList.length;
-    let iterator = Math.ceil(length/globalContext.itemsPerScreen);
+    let iterator = Math.ceil(length/settingsContext.itemsPerScreen);
     let result = [];
     for(let i = 1; i <= iterator; i++){
       result.push(i);
@@ -41,8 +44,8 @@ function List(props) {
 
 
   function itemPagina(objArr, page){
-    let itemPerPage = globalContext.itemsPerScreen;
-    let tempArr = objArr.slice((page*itemPerPage)-globalContext.itemsPerScreen, page*itemPerPage);
+    let itemPerPage = settingsContext.itemsPerScreen;
+    let tempArr = objArr.slice((page*itemPerPage)-settingsContext.itemsPerScreen, page*itemPerPage);
     return(tempArr);
   };
 
@@ -51,31 +54,42 @@ function List(props) {
    setPage(pageClicked);
   }
 
+  function canDelete(user) {
+     return user.permissions.includes("delete ")
+  }
 
   let renderList = tempArray.map((item)=> (
       <>
-      <Toast className="rounded mr-2" key={item._id} onClose={() => props.makeDelete(item._id)}>
       
-      <Toast.Header>
+      <Toast className="rounded mr-2" key={item._id} onClose={() => props.makeDelete(item._id)}>
+     
+      <Toast.Header closeButton={canDelete(userContext.user)}>
         <If condition={item.complete} >
           <Then>
-            <Badge onClick={()=> props.makePut(item)} pill variant="danger">
-              Complete
-            </Badge>
+          <Auth capability="update">
+              <Badge onClick={()=> props.makePut(item)} pill variant="danger">
+                Complete
+              </Badge>
+          </Auth> 
           </Then>
           <Else>
-            <Badge  onClick={()=> props.makePut(item)} pill variant="success">
-              Pending
-            </Badge>
+            <Auth capability="update">
+              <Badge  onClick={()=> props.makePut(item)} pill variant="success">
+                Pending
+              </Badge>
+            </Auth> 
           </Else>
         </If>
         <strong className="mr-auto">  {item.assignee}</strong>
         <small>Difficulty: {item.difficulty}</small>
       </Toast.Header>
+        <Collapse in={item.complete}>
         <Toast.Body >
           {item.text}
         </Toast.Body>
+        </Collapse> 
       </Toast>
+      
     </>
   ))
 

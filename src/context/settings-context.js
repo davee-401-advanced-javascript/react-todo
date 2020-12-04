@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 
-export const GlobalContext = React.createContext();
+export const SettingsContext = React.createContext();
 
-function Global(props){
+function Settings(props){
 
   const [mode, setMode] = useState('');
 
@@ -28,10 +28,10 @@ function Global(props){
   }, [props.default]);
 
   return (
-    <GlobalContext.Provider value={{mode, toggleMode, displayCompleted, itemsPerScreen, defaultSort}}>
+    <SettingsContext.Provider value={{mode, toggleMode, displayCompleted, itemsPerScreen, defaultSort}}>
       {props.children}
-    </GlobalContext.Provider>
+    </SettingsContext.Provider>
   )
 }
 
-export default Global;
+export default Settings;

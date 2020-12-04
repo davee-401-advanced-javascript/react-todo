@@ -1,16 +1,16 @@
 import React, {useContext}  from 'react';
 import Form from 'react-bootstrap/Form'
 
-import {GlobalContext} from '../context/global.js'
+import {SettingsContext} from '../../context/settings-context.js'
 
-function About(){
+function SettingsPage(){
 
-  const globalContext = useContext(GlobalContext);
+  const settingsContext = useContext(SettingsContext);
 
 
   return (
     <>
-    <h2>About us</h2>
+    <h2>Settings Page</h2>
     <Form>
       <Form.Check 
         type="switch"
@@ -28,4 +28,4 @@ function About(){
   )
 }
 
-export default About;
+export default SettingsPage;

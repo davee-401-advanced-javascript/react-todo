@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 
 import './form.scss';
 import useForm from '../form-hook/form-hook.js';
+import Auth from '../../context/auth/auth.js'
 
 function TodoForm (props) {
 
@@ -18,7 +19,7 @@ function TodoForm (props) {
   }
 
   return(
-    
+   <Auth capability="create"> 
     <Form onSubmit={handleSubmit}>
       <h4>Add To Do Item</h4>
       
@@ -60,7 +61,7 @@ function TodoForm (props) {
       </Button>
 
     </Form>
-
+  </Auth>
   )
 
 }
