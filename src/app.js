@@ -2,7 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router,Route,} from "react-router-dom";
 
-import SettingsContext from './context/global.js';
+import SettingsContext from './context/settings-context.js';
 import LogInContext from './context/auth/context.js'
 import Header from './components/header/header.js'
 import Todo from './components/todo/todo.js';

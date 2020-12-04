@@ -4,17 +4,17 @@ import { If, Then, Else, When, Unless, Switch, Case, Default } from 'react-if';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Toast from 'react-bootstrap/Toast'
 import Badge from 'react-bootstrap/Badge'
-import Pagination from 'react-bootstrap/Pagination';
+// import Pagination from 'react-bootstrap/Pagination';
 import Collapse from 'react-bootstrap/Collapse'
 import Auth from '../../context/auth/auth.js'
 
-import {GlobalContext} from '../../context/global.js';
+import {SettingsContext} from '../../context/settings-context.js';
 
 
 
 function List(props) {
 
-  const globalContext = useContext(GlobalContext);
+  const settingsContext = useContext(SettingsContext);
 
   const [page, setPage] = useState(1);
   const [tempArray, setTempArray] = useState([])
@@ -27,7 +27,7 @@ function List(props) {
 
   useEffect ( () => {
     let length = props.itemList.length;
-    let iterator = Math.ceil(length/globalContext.itemsPerScreen);
+    let iterator = Math.ceil(length/settingsContext.itemsPerScreen);
     let result = [];
     for(let i = 1; i <= iterator; i++){
       result.push(i);
@@ -42,8 +42,8 @@ function List(props) {
 
 
   function itemPagina(objArr, page){
-    let itemPerPage = globalContext.itemsPerScreen;
-    let tempArr = objArr.slice((page*itemPerPage)-globalContext.itemsPerScreen, page*itemPerPage);
+    let itemPerPage = settingsContext.itemsPerScreen;
+    let tempArr = objArr.slice((page*itemPerPage)-settingsContext.itemsPerScreen, page*itemPerPage);
     return(tempArr);
   };
 

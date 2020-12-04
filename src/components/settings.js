@@ -1,11 +1,11 @@
 import React, {useContext}  from 'react';
 import Form from 'react-bootstrap/Form'
 
-import {GlobalContext} from '../context/global.js'
+import {SettingsContext} from '../context/settings-context.js'
 
 function About(){
 
-  const globalContext = useContext(GlobalContext);
+  const settingsContext = useContext(SettingsContext);
 
 
   return (

@@ -5,14 +5,11 @@ import Button from 'react-bootstrap/Button';
 import {If, Then, Else, When} from 'react-if';
 
 
-
 import {LoginContext} from '../../context/auth/context.js'
-import LogIn from '../../context/auth/login.js'
-// import {GlobalContext} from '../../context/global.js';
+
 
 function SignUp (props) {
 
-  // const globalContext = useContext(GlobalContext);
   const userContext = useContext(LoginContext);
   const [user, setUser] = useState({});
 

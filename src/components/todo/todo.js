@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import {GlobalContext} from '../../context/global.js';
+import {SettingsContext} from '../../context/settings-context.js';
 
 import List from '../list/list.js'
 import SmallNav from '../small-nav/small-nav.js'
@@ -18,7 +18,7 @@ function Todo() {
 
   const [itemList, setItemList] = useState([]);
   const [active, setActive] = useState(0);
-  const globalContext = useContext(GlobalContext);
+  const settingsContext = useContext(SettingsContext);
   
   function updateItem(obj) {
     makePost(obj);
@@ -38,7 +38,7 @@ function Todo() {
 
 
   function sortHelper(array) {
-    if(globalContext.defaultSort === 'difficulty'){
+    if(settingsContext.defaultSort === 'difficulty'){
       array.sort((a,b) => {
         return a.difficulty - b.difficulty;
       })
@@ -56,7 +56,7 @@ function Todo() {
       });
     }
 
-    if(globalContext.displayCompleted === false) {
+    if(settingsContext.displayCompleted === false) {
       array = array.filter( obj => obj.complete === false);
     }
 

@@ -4,11 +4,11 @@ import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
 
 import LogIn from '../../context/auth/login.js'
-import {GlobalContext} from '../../context/global.js';
+// import {SettingsContext} from '../../context/settings-context.js';
 
 function Header (props) {
 
-  const globalContext = useContext(GlobalContext);
+  // const settingsContext = useContext(SettingsContext);
 
   return(
   <Navbar bg="primary" variant="dark">
