@@ -5,8 +5,8 @@ export const SettingsContext = React.createContext();
 function Settings(props) {
   const [mode, setMode] = useState('');
 
+  const [itemsPerScreen, setItemsPerScreen] = useState(3);
   const [displayCompleted, setDisplayCompleted] = useState(true);
-  const [itemsPerScreen, setItemsPerScreen] = useState(5);
   // this could be sorted by difficulty or assignee
   const [defaultSort, setDefaultSort] = useState('difficulty');
 

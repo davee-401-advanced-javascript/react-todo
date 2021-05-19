@@ -6,7 +6,7 @@ import './form.scss';
 import useForm from '../form-hook/form-hook.js';
 import Auth from '../../context/auth/auth.js';
 
-function TodoForm(props) {
+function TodoForm({ makePost }) {
   const [handleSubmit, handleChange] = useForm(doneWithForm);
 
   function doneWithForm(formItem) {
@@ -14,7 +14,7 @@ function TodoForm(props) {
     if (!formItem.difficulty) {
       formItem.difficulty = 1;
     }
-    props.makePost(formItem);
+    makePost(formItem);
   }
 
   return (

@@ -8,6 +8,7 @@ const useForm = (callback) => {
       ...values,
       [e.target.name]: e.target.value,
     };
+    console.log('New Items in form:', newItem);
     setValues(newItem);
   };
 

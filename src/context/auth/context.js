@@ -53,6 +53,7 @@ function LoginProvider(props) {
   const logout = () => {
     setIsLoggedIn(false);
     setUser({});
+    cookie.remove('auth');
   };
 
   // this will check the cookie and automatically login

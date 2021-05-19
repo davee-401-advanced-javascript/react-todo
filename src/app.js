@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 import SettingsContext from './context/settings-context.js';
 import LogInProvider from './context/auth/context.js';
@@ -15,14 +15,16 @@ function App() {
       <LogInProvider>
         <Router>
           <Header />
-          <Route exact path="/settings">
-            <SettingsPage />
-          </Route>
-          <Route exact path="/">
-            <Auth capability="read">
-              <Todo />
-            </Auth>
-          </Route>
+          <Switch>
+            <Route exact path="/">
+              <Auth capability="read">
+                <Todo />
+              </Auth>
+            </Route>
+            <Route exact path="/settings">
+              <SettingsPage />
+            </Route>
+          </Switch>
         </Router>
       </LogInProvider>
     </SettingsContext>

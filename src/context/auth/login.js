@@ -18,10 +18,15 @@ function Login(props) {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
+  const handleLogout = () => {
+    document.location.href = '/';
+    userContext.logout();
+  };
+
   return (
     <If condition={userContext.isLoggedIn}>
       <Then>
-        <Button variant="light" onClick={userContext.logout}>
+        <Button variant="light" onClick={handleLogout}>
           Log Out
         </Button>
       </Then>

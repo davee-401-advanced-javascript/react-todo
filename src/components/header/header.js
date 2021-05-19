@@ -15,7 +15,9 @@ function Header(props) {
         <Nav.Link href="/">Home</Nav.Link>
       </Nav>
       <When condition={userContext.isLoggedIn}>
-        <Button variant="light">Settings</Button>
+        <Button variant="light" href="/settings">
+          Settings
+        </Button>
       </When>
       <LogIn />
     </Navbar>
