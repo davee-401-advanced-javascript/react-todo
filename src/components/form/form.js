@@ -14,7 +14,7 @@ function TodoForm(props) {
     if (!formItem.difficulty) {
       formItem.difficulty = 1;
     }
-    props.updateItem(formItem);
+    props.makePost(formItem);
   }
 
   return (

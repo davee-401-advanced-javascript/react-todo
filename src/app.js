@@ -8,7 +8,6 @@ import Header from './components/header/header.js';
 import Todo from './components/todo/todo.js';
 import SettingsPage from './components/settings-page/settings-page.js';
 import Auth from './context/auth/auth.js';
-import SignUp from './components/signup/signup.js';
 
 function App() {
   return (
@@ -20,7 +19,6 @@ function App() {
             <SettingsPage />
           </Route>
           <Route exact path="/">
-            <SignUp />
             <Auth capability="read">
               <Todo />
             </Auth>
