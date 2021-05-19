@@ -57,7 +57,7 @@ function List({ itemList, makeDelete, makePut }) {
   let renderList = tempArray.map((item) => (
     <>
       <Toast
-        className="rounded mr-2"
+        // className="rounded mr-2"
         key={item._id}
         onClose={() => makeDelete(item._id)}
       >

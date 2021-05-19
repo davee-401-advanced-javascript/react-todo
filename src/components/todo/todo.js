@@ -62,7 +62,6 @@ function Todo() {
     });
     if (raw) {
       let sorted = sortHelper(raw.data.results);
-      console.log('🚀 ~ file: todo.js ~ line 65 ~ getAll ~ sorted ', sorted);
       setItemList(sorted);
       updateActive(sorted);
     }

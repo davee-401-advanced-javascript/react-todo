@@ -43,7 +43,7 @@ function LoginProvider(props) {
       let tokenUser = jwt.verify(token, process.env.REACT_APP_SECRET);
       // if we're here, the token was good
       setIsLoggedIn(true);
-      console.log('tokenUser', tokenUser);
+      // console.log('tokenUser', tokenUser);
       setUser(tokenUser);
       cookie.save('auth', token);
       // set a cookie so that we can stay logged in
