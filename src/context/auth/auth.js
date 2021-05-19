@@ -1,11 +1,10 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 
-import {LoginContext} from './context.js';
-import {When} from 'react-if';
+import { LoginContext } from './context.js';
+import { When } from 'react-if';
 // import Login from './login.js';
 
 function Auth(props) {
-
   const loginContext = useContext(LoginContext);
 
   let okToRender = false;
@@ -17,17 +16,12 @@ function Auth(props) {
       ? loginContext.user.permissions.includes(props.capability)
       : true;
 
-      okToRender = loginContext.isLoggedIn && canDo;
-  } catch(e) {
-    console.warn('Not Authorized')
+    okToRender = loginContext.isLoggedIn && canDo;
+  } catch (e) {
+    console.warn('Not Authorized');
   }
 
-  return (
-    <When condition={okToRender}>
-      {props.children}
-    </When>
-  )
-
+  return <When condition={okToRender}>{props.children}</When>;
 }
 
 export default Auth;

@@ -1,22 +1,21 @@
-import React, {useState, useContext} from 'react';
+import React, { useState, useContext } from 'react';
 
-import {LoginContext} from './context.js';
+import { LoginContext } from './context.js';
 
-import {If, Then, Else} from 'react-if';
+import { If, Then, Else } from 'react-if';
 
 function Login(props) {
-
   const userContext = useContext(LoginContext);
   const [user, setUser] = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
     userContext.login(user);
-  }
+  };
 
   const handleChange = (e) => {
-    setUser( { ...user, [e.target.name]: e.target.value })
-  }
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
 
   return (
     <If condition={userContext.isLoggedIn}>
@@ -31,7 +30,7 @@ function Login(props) {
         </form>
       </Else>
     </If>
-  )
+  );
 }
 
 export default Login;

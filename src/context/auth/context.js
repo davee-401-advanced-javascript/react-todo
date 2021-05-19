@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import superagent from 'superagent';
 import jwt from 'jsonwebtoken';
 import cookie from 'react-cookies';
@@ -6,7 +6,6 @@ import cookie from 'react-cookies';
 export const LoginContext = React.createContext();
 
 function LoginProvider(props) {
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
 
@@ -14,73 +13,63 @@ function LoginProvider(props) {
     const API = process.env.REACT_APP_API;
 
     try {
-    const response = await superagent.post(`${API}/signin`)
-      .auth( input.username, input.password );
+      const response = await superagent
+        .post(`${API}/signin`)
+        .auth(input.username, input.password);
 
-    const {token} = response.body;
+      const { token } = response.body;
 
-    validateToken(token);
-
-    } catch(e) {
+      validateToken(token);
+    } catch (e) {
       console.warn('Login Attempt Failed');
     }
+  };
 
-  }
-
-  const signUp = async(input) => {
-
+  const signUp = async (input) => {
     const API = process.env.REACT_APP_API;
 
-    try{
+    try {
       const response = await superagent.post(`${API}/signup`).send(input);
-
 
       login(input);
       console.log('now logged in');
-
-    } catch(e) {
-      console.warn('Something Bad Happened. Error in Signing Up')
+    } catch (e) {
+      console.warn('Something Bad Happened. Error in Signing Up');
     }
-  }
+  };
 
   const validateToken = (token) => {
-
     try {
-      let tokenUser = jwt.verify(token, process.env.REACT_APP_SECRET)
+      let tokenUser = jwt.verify(token, process.env.REACT_APP_SECRET);
       // if we're here, the token was good
       setIsLoggedIn(true);
       console.log('tokenUser', tokenUser);
-      setUser(tokenUser)
+      setUser(tokenUser);
       cookie.save('auth', token);
       // set a cookie so that we can stay logged in
       // Optionally, make it only last 1 hour or until you close
-    } catch(e) {
+    } catch (e) {
       setIsLoggedIn(false);
       setUser({});
-      console.warn("Token Validation Error");
+      console.warn('Token Validation Error');
     }
-  }
-
-
+  };
 
   const logout = () => {
     setIsLoggedIn(false);
     setUser({});
-  }
+  };
 
-  useEffect( () => {
+  useEffect(() => {
     const token = cookie.load('auth') || null;
     validateToken(token);
-  },[])
+  }, []);
 
   return (
-    <LoginContext.Provider
-      value={ {isLoggedIn, user, login, logout, signUp} }
-    >
+    <LoginContext.Provider value={{ isLoggedIn, user, login, logout, signUp }}>
       {props.children}
     </LoginContext.Provider>
-  )
-
+  );
 }
 
 export default LoginProvider;
