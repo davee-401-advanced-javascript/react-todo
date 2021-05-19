@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { If, Then, Else, When, Unless, Switch, Case, Default } from 'react-if';
+import { If, Then, Else } from 'react-if';
 
 import ListGroup from 'react-bootstrap/ListGroup';
 import Toast from 'react-bootstrap/Toast';
 import Badge from 'react-bootstrap/Badge';
 import Pagination from 'react-bootstrap/Pagination';
-import Collapse from 'react-bootstrap/Collapse';
 import Auth from '../../context/auth/auth.js';
 
 import { LoginContext } from '../../context/auth/context.js';
@@ -82,9 +81,7 @@ function List({ itemList, makeDelete, makePut }) {
           <strong className="mr-auto"> {item.assignee}</strong>
           <small>Difficulty: {item.difficulty}</small>
         </Toast.Header>
-        <Collapse in={item.complete}>
-          <Toast.Body>{item.text}</Toast.Body>
-        </Collapse>
+        <Toast.Body>{item.text}</Toast.Body>
       </Toast>
     </>
   ));

@@ -3,7 +3,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
 import LogIn from '../../context/auth/login.js';
-import SignUp from '../signup/signup.js';
+// import SignUp from '../signup/signup.js';
 
 function Header(props) {
   return (
@@ -12,7 +12,7 @@ function Header(props) {
         <Nav.Link href="#home">Home</Nav.Link>
       </Nav>
       <LogIn />
-      <SignUp />
+      {/* <SignUp /> */}
     </Navbar>
   );
 }
