@@ -6,14 +6,20 @@ function Settings(props) {
   const [mode, setMode] = useState('');
 
   const [displayCompleted, setDisplayCompleted] = useState(true);
-
   const [itemsPerScreen, setItemsPerScreen] = useState(5);
-
   // this could be sorted by difficulty or assignee
   const [defaultSort, setDefaultSort] = useState('difficulty');
 
-  function changePagination() {
-    setItemsPerScreen('new number');
+  function changeDisplayCompleted(boolean) {
+    setDisplayCompleted(boolean);
+  }
+
+  function changeitemsPerScreen(num) {
+    setItemsPerScreen(num);
+  }
+
+  function changeDefaultSort(sortby) {
+    setDefaultSort(sortby);
   }
 
   const toggleMode = () => {
@@ -30,8 +36,11 @@ function Settings(props) {
         mode,
         toggleMode,
         displayCompleted,
+        changeDisplayCompleted,
         itemsPerScreen,
+        changeitemsPerScreen,
         defaultSort,
+        changeDefaultSort,
       }}
     >
       {props.children}

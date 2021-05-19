@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import SettingsContext from './context/settings-context.js';
-import LogInContext from './context/auth/context.js';
+import LogInProvider from './context/auth/context.js';
 import Header from './components/header/header.js';
 import Todo from './components/todo/todo.js';
 import SettingsPage from './components/settings-page/settings-page.js';
@@ -12,10 +12,10 @@ import Auth from './context/auth/auth.js';
 function App() {
   return (
     <SettingsContext>
-      <LogInContext>
+      <LogInProvider>
         <Router>
           <Header />
-          <Route exact path="/about">
+          <Route exact path="/settings">
             <SettingsPage />
           </Route>
           <Route exact path="/">
@@ -24,7 +24,7 @@ function App() {
             </Auth>
           </Route>
         </Router>
-      </LogInContext>
+      </LogInProvider>
     </SettingsContext>
   );
 }

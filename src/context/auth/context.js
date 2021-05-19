@@ -16,7 +16,6 @@ function LoginProvider(props) {
       const response = await superagent
         .post(`${API}/signin`)
         .auth(input.username, input.password);
-
       const { token } = response.body;
 
       validateToken(token);
@@ -29,7 +28,7 @@ function LoginProvider(props) {
     const API = process.env.REACT_APP_API;
 
     try {
-      const response = await superagent.post(`${API}/signup`).send(input);
+      await superagent.post(`${API}/signup`).send(input);
 
       login(input);
       console.log('now logged in');
@@ -41,13 +40,9 @@ function LoginProvider(props) {
   const validateToken = (token) => {
     try {
       let tokenUser = jwt.verify(token, process.env.REACT_APP_SECRET);
-      // if we're here, the token was good
       setIsLoggedIn(true);
-      // console.log('tokenUser', tokenUser);
       setUser(tokenUser);
       cookie.save('auth', token);
-      // set a cookie so that we can stay logged in
-      // Optionally, make it only last 1 hour or until you close
     } catch (e) {
       setIsLoggedIn(false);
       setUser({});
@@ -60,6 +55,7 @@ function LoginProvider(props) {
     setUser({});
   };
 
+  // this will check the cookie and automatically login
   useEffect(() => {
     const token = cookie.load('auth') || null;
     validateToken(token);
