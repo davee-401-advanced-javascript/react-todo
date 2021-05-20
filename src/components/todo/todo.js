@@ -18,10 +18,6 @@ function Todo() {
   const [active, setActive] = useState(0);
   const settingsContext = useContext(SettingsContext);
 
-  function updateItem(obj) {
-    makePost(obj);
-  }
-
   function updateActive(array) {
     let active = array.reduce((acc, item, i) => {
       if (item.complete === false) {
@@ -52,7 +48,7 @@ function Todo() {
       });
     }
 
-    if (settingsContext.displayCompleted === false) {
+    if (settingsContext.displayCompleted === 'false') {
       array = array.filter((obj) => obj.complete === false);
     }
 
@@ -65,14 +61,14 @@ function Todo() {
       url: 'https://davee-auth-api-server.herokuapp.com/api/v1/todo',
     });
     if (raw) {
-      let sorter = sortHelper(raw.data.results);
-      setItemList(sorter);
-      updateActive(sorter);
+      let sorted = sortHelper(raw.data.results);
+      setItemList(sorted);
+      updateActive(sorted);
     }
   }
 
   async function makePost(obj) {
-    let raw = await axios({
+    await axios({
       method: 'POST',
       url: 'https://davee-auth-api-server.herokuapp.com/api/v1/todo',
       data: obj,
@@ -87,7 +83,7 @@ function Todo() {
       obj.complete = true;
     }
 
-    let raw = await axios({
+    await axios({
       method: 'PUT',
       url: `https://davee-auth-api-server.herokuapp.com/api/v1/todo/${obj._id}`,
       data: obj,
@@ -96,11 +92,37 @@ function Todo() {
   }
 
   async function makeDelete(id) {
-    let raw = await axios({
+    await axios({
       method: 'DELETE',
       url: `https://davee-auth-api-server.herokuapp.com/api/v1/todo/${id}`,
     });
     getAll();
+  }
+
+  function getSettingsLocalStorage() {
+    if (localStorage.getItem('ToDoApp-Settings')) {
+      try {
+        let settings = JSON.parse(localStorage.getItem('ToDoApp-Settings'));
+        settingsContext.changeitemsPerScreen(settings.itemsPerScreen);
+        settingsContext.changeDisplayCompleted(settings.displayCompleted);
+        settingsContext.changeDefaultSort(settings.defaultSort);
+      } catch (error) {
+        localStorage.removeItem('ToDoApp-Settings');
+        console.warn('Local Settings Corrupt:', error);
+      }
+    } else {
+      localStorage.setItem(
+        'ToDoApp-Settings',
+        JSON.stringify({
+          itemsPerScreen: 3,
+          displayCompleted: true,
+          defaultSort: 'difficulty',
+        })
+      );
+      settingsContext.changeitemsPerScreen(3);
+      settingsContext.changeDisplayCompleted(true);
+      settingsContext.changeDefaultSort('difficulty');
+    }
   }
 
   useEffect(() => {
@@ -108,6 +130,7 @@ function Todo() {
   }, [active]);
 
   useEffect(() => {
+    getSettingsLocalStorage();
     getAll();
   }, []);
 
@@ -117,7 +140,7 @@ function Todo() {
       <Container fluid className="main">
         <Row>
           <Col>
-            <TodoForm updateItem={updateItem} />
+            <TodoForm makePost={makePost} />
           </Col>
           <Col>
             <List

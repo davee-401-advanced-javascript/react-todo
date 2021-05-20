@@ -6,7 +6,7 @@ import './form.scss';
 import useForm from '../form-hook/form-hook.js';
 import Auth from '../../context/auth/auth.js';
 
-function TodoForm(props) {
+function TodoForm({ makePost }) {
   const [handleSubmit, handleChange] = useForm(doneWithForm);
 
   function doneWithForm(formItem) {
@@ -14,12 +14,12 @@ function TodoForm(props) {
     if (!formItem.difficulty) {
       formItem.difficulty = 1;
     }
-    props.updateItem(formItem);
+    makePost(formItem);
   }
 
   return (
     <Auth capability="create">
-      <Form onSubmit={handleSubmit}>
+      <Form className="todo-form" onSubmit={handleSubmit}>
         <h4>Add To Do Item</h4>
 
         <Form.Group controlId="formBasicTask">

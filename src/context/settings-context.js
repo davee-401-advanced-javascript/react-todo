@@ -5,24 +5,25 @@ export const SettingsContext = React.createContext();
 function Settings(props) {
   const [mode, setMode] = useState('');
 
-  const [displayCompleted, setDisplayCompleted] = useState(true);
+  const [itemsPerScreen, setItemsPerScreen] = useState(null);
+  const [displayCompleted, setDisplayCompleted] = useState(null);
+  const [defaultSort, setDefaultSort] = useState('');
 
-  const [itemsPerScreen, setItemsPerScreen] = useState(3);
+  function changeitemsPerScreen(num) {
+    setItemsPerScreen(num);
+  }
 
-  // this could be sorted by difficulty or assignee
-  const [defaultSort, setDefaultSort] = useState('assignee');
+  function changeDisplayCompleted(boolean) {
+    setDisplayCompleted(boolean);
+  }
 
-  function changePagination() {
-    setItemsPerScreen('new number');
+  function changeDefaultSort(sortby) {
+    setDefaultSort(sortby);
   }
 
   const toggleMode = () => {
     setMode(mode === 'dark' ? 'light' : 'dark');
   };
-
-  useEffect(() => {
-    setMode(props.default);
-  }, [props.default]);
 
   return (
     <SettingsContext.Provider
@@ -30,8 +31,11 @@ function Settings(props) {
         mode,
         toggleMode,
         displayCompleted,
+        changeDisplayCompleted,
         itemsPerScreen,
+        changeitemsPerScreen,
         defaultSort,
+        changeDefaultSort,
       }}
     >
       {props.children}
