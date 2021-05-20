@@ -56,6 +56,20 @@ function List({ itemList, makeDelete, makePut }) {
     return user.permissions.includes('delete');
   }
 
+  function handleNextButton() {
+    if (page < buttonListArray.length) {
+      let next = page + 1;
+      setPage(next);
+    }
+  }
+
+  function handlePrevButton() {
+    if (page > 1) {
+      let previous = page - 1;
+      setPage(previous);
+    }
+  }
+
   let renderList = tempArray.map((item) => (
     <>
       <Toast
@@ -91,13 +105,19 @@ function List({ itemList, makeDelete, makePut }) {
   let paginationButtons = (
     <>
       <Pagination>
-        <Pagination.Item key="previous"> Previous </Pagination.Item>
+        <Pagination.Item key="previous" onClick={handlePrevButton}>
+          {' '}
+          Previous{' '}
+        </Pagination.Item>
         {buttonListArray.map((value) => (
           <Pagination.Item key={value} onClick={() => pageClick(value)}>
             {value}
           </Pagination.Item>
         ))}
-        <Pagination.Item key="next"> Next </Pagination.Item>
+        <Pagination.Item key="next" onClick={handleNextButton}>
+          {' '}
+          Next{' '}
+        </Pagination.Item>
       </Pagination>
     </>
   );
