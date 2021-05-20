@@ -5,8 +5,9 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Toast from 'react-bootstrap/Toast';
 import Badge from 'react-bootstrap/Badge';
 import Pagination from 'react-bootstrap/Pagination';
-import Auth from '../../context/auth/auth.js';
 
+import './list.scss';
+import Auth from '../../context/auth/auth.js';
 import { LoginContext } from '../../context/auth/context.js';
 import { SettingsContext } from '../../context/settings-context.js';
 
@@ -57,7 +58,7 @@ function List({ itemList, makeDelete, makePut }) {
   let renderList = tempArray.map((item) => (
     <>
       <Toast
-        // className="rounded mr-2"
+        className="toast_body"
         key={item._id}
         onClose={() => makeDelete(item._id)}
       >

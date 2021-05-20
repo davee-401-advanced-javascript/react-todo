@@ -51,8 +51,6 @@ function Todo() {
     if (settingsContext.displayCompleted === 'false') {
       array = array.filter((obj) => obj.complete === false);
     }
-    console.log('From Sort Helper');
-    console.log('array:', array);
 
     return array;
   }
@@ -105,7 +103,6 @@ function Todo() {
     if (localStorage.getItem('ToDoApp-Settings')) {
       try {
         let settings = JSON.parse(localStorage.getItem('ToDoApp-Settings'));
-        console.log('SETTTINGS:', settings);
         settingsContext.changeitemsPerScreen(settings.itemsPerScreen);
         settingsContext.changeDisplayCompleted(settings.displayCompleted);
         settingsContext.changeDefaultSort(settings.defaultSort);
@@ -114,7 +111,6 @@ function Todo() {
         console.warn('Local Settings Corrupt:', error);
       }
     } else {
-      console.log('this was triggered');
       localStorage.setItem(
         'ToDoApp-Settings',
         JSON.stringify({
