@@ -1,102 +1,132 @@
-# React - To Do Lab
+# React - To Do App
 
 ## Author: Davee Sok & Ryan Geddes
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/2b317bf0-8bb7-4e19-a9da-b6823036e130/deploy-status)](https://app.netlify.com/sites/davees-react-to-do-app/deploys)
+
+## Overview
+
+This is a todo app that allows a user to assign task with different difficulty levels to multiple people. It performs crud operations via a node backend. The learning objective was to use react, props & states, routing, hooks, context, and basic authentication/authorization.
 
 ## Links and Resources:
 
 - [Front-End Website](https://davees-react-to-do-app.netlify.app/)
-- [Back-End - Authenticad API Server](https://davee-auth-api-server.herokuapp.com/api/v1/todo)
+  - username: admin
+  - password: admin
 - [Back-End Repository](https://github.com/davee-401-advanced-javascript/authenticated-api-server)
+- [Back-End - Authenticated API Server](https://davee-auth-api-server.herokuapp.com/api/v1/todo)
 - [Lab 31 Pull Request](https://github.com/ryangeddes-401-advanced-javascript/react-todo/pull/2)
 - [Lab 32 Pull Request](https://github.com/ryangeddes-401-advanced-javascript/react-todo/pull/5)
 - [Lab 33 Pull Request](https://github.com/ryangeddes-401-advanced-javascript/react-todo/pull/7)
 - [Lab 34 Pull Request](https://github.com/ryangeddes-401-advanced-javascript/react-todo/pull/8)
 
-## Setup
+## User Stories
 
-### `.env` requirements:
+- As a user, I would like an easy way to add a new to do item using an online interface
+- As a user, I would like my to do items to have an assignee, due date, difficulty meter, status and the task itself
+- As a user, I would like to delete to do items that are no longer needed
+- As a user, I would like to easily mark to do items as completed
+- As a user, I would like to edit an existing to do item
 
-<!-- i.e.
-- `PORT` - Port Number
-- `MONGODB_URI` - URL to the running mongo instance/db -->
+## Business Requirements
 
-```
+The To Do Manager application has the following overall requirements:
 
-```
+- Header, Main Section Footer
+- Use React [Bootstrap](https://react-bootstrap.github.io/) for styling and visual components
 
-### How to initialize/run this application:
+- The header should present the application title and main menu
 
-<!-- - e.g. `npm start` -->
+  - Home Link, which shows the list of To Do Items as noted below
+  - A Login/Register/User section
 
-```
+    - When a user is **not logged in**:
 
-```
+      - Show Login and Register links
+        - Login: Renders a Login Form
+        - Register: Renders a new user registration form
+          - Require Fields:: Username, Password, Email, Role
 
-### Tests:
+    - When a user **is logged in**:
+      - Show “Welcome username”
+      - Show a “Logout” link
+        - When clicked, this should remove any cookies you have set and remove access
 
-<!-- - How to run tests?
-- Any tests of note?
-- Describe any tests that you did not complete, skipped, etc -->
+- In the “Main” section
 
-```
+  - Nothing should be visible until a user has logged in successfully
+  - **The list of items in the to do list**
 
-```
+    - Based on user preferences, show listings in groups of (5, 10, etc) and provide the ability to view multiple “pages” of results
+    - Each item in list should show the text of the item as well as the assignee
 
-<hr>
+      - Based on user preferences, hide or show completed items
+      - If shown, completed items should be styled differently making their status visually obvious
 
-## UML:
+    - For users with “Update” permissions
 
-![Our UML](uml.jpg)
+      - When an item is clicked, toggle the “complete” status of the item.
 
-<hr>
+    - For users with “Delete” permissions
 
-## Our Notes:
+      - Items should have a delete button associated with them
+        - When clicked, remove the item from the list
 
-Johns Example:  
-https://todo-list-manager.netlify.app/  
-username: admin  
-password: ADMIN
+    - For users with “Create” permissions …
 
-### Setting Up React App:
+      - **A Form where the user can a new item to the todo list**
 
-```
-npx create-react-app APP-NAME
-cd APP-name
-```
+        - Items should have the following fields:
 
-- Go to github
-- Create a Repo
+          - To Do Item Text
+          - Assigned To
+          - Status (complete/incomplete)
+          - Difficulty (number between 1 and 5)
+          - i.e.
 
-```
-git remote add origin https://github.com/REPO
-git remote -v
-git push -f origin master
-```
+            ```javascript
+            const todo = mongoose.Schema({
+              text: { type: String, required: true },
+              assignee: { type: String },
+              complete: { type: Boolean, default: false },
+              difficulty: { type: Number, default: 1 },
+            });
+            ```
 
-### Backend API used for development:
+## Technical Requirements
 
-https://davee-auth-api-server.herokuapp.com/api/v1/todo
+The application will be created with the following overall architecture and methodologies
 
-The following routes are available:
+1. React
+2. ES6 Classes
+3. Settings delivered to the application using Context
+4. User Login & Permissions delivered to the application using Context
+5. Local Storage / Cookies for storing login status
+6. Local Storage / Cookies for storing user preferences
+7. Superagent or Axios for performing API Requests
+8. React Bootstrap for styling
+9. Test Driven Development, using Jest
+   - Tests will be runnable locally
+10. Deployment to cloud provider
 
-```
-/signup
-/signin
+## Development Process, Milestones
 
-api/v1/categories
-api/v1/products
-api/v1/todo
+At every stage of development, the application should be publicly deployed
 
-api/v2/categories
-api/v2/products
-api/v2/todo
-```
+1. Phase 1: Application Setup
 
-```
-const todo = mongoose.Schema({
-  text: { type: String, required: true },
-  assignee: { type: String },
-  complete: { type: Boolean, default:false },
-  difficulty: { type: Number, default: 1 },
-});
-```
+   - Basic To Do List Management, using Hooks
+
+2. Phase 2: Persistence
+
+   - Implement a custom Form Hook
+   - Implement a custom Ajax Hook
+   - Connect to a live API for storing To Do Items
+
+3. Phase 3: Settings and Global Context
+
+   - Implement user settings for displaying items
+
+4. Phase 4: Authorization
+   - Require a login to access the list
+   - Restrict access to adding, editing, deleting to certain user types
