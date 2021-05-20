@@ -48,9 +48,11 @@ function Todo() {
       });
     }
 
-    if (settingsContext.displayCompleted === false) {
+    if (settingsContext.displayCompleted === 'false') {
       array = array.filter((obj) => obj.complete === false);
     }
+    console.log('From Sort Helper');
+    console.log('array:', array);
 
     return array;
   }
@@ -134,7 +136,7 @@ function Todo() {
   useEffect(() => {
     getSettingsLocalStorage();
     getAll();
-  }, [itemList]);
+  }, []);
 
   return (
     <>

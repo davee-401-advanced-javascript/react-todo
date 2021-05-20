@@ -10,6 +10,15 @@ function SettingsPage() {
   const [handleSubmit, handleChange] = useForm(doneWithForm);
 
   function doneWithForm(formItem) {
+    if (!formItem.itemsPerScreen) {
+      formItem.itemsPerScreen = 3;
+    }
+    if (!formItem.displayCompleted) {
+      formItem.displayCompleted = true;
+    }
+    if (!formItem.defaultSort) {
+      formItem.defaultSort = 'difficulty';
+    }
     localStorage.setItem('ToDoApp-Settings', JSON.stringify(formItem));
     document.location.href = '/';
   }
