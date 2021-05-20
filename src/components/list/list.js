@@ -58,7 +58,11 @@ function List({ itemList, makeDelete, makePut }) {
 
   let renderList = tempArray.map((item) => (
     <>
-      <Toast key={item._id} onClose={() => makeDelete(item._id)}>
+      <Toast
+        className="toast_body"
+        key={item._id}
+        onClose={() => makeDelete(item._id)}
+      >
         <Toast.Header closeButton={canDelete(userContext.user)}>
           <If condition={item.complete}>
             <Then>
@@ -79,7 +83,7 @@ function List({ itemList, makeDelete, makePut }) {
           <strong className="mr-auto"> {item.assignee}</strong>
           <small>Difficulty: {item.difficulty}</small>
         </Toast.Header>
-        <Toast.Body className="toast_body">{item.text}</Toast.Body>
+        <Toast.Body>{item.text}</Toast.Body>
       </Toast>
     </>
   ));
