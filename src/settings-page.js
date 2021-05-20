@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 
 import './settings-page.scss';
-import useForm from '../form-hook/form-hook.js';
+import useForm from './components/form-hook/form-hook.js';
 
 function SettingsPage() {
   const [handleSubmit, handleChange] = useForm(doneWithForm);

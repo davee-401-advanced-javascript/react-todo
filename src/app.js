@@ -6,7 +6,7 @@ import SettingsContext from './context/settings-context.js';
 import LogInProvider from './context/auth/context.js';
 import Header from './components/header/header.js';
 import Todo from './components/todo/todo.js';
-import SettingsPage from './components/settings-page/settings-page.js';
+import SettingsPage from './settings-page.js';
 import Auth from './context/auth/auth.js';
 
 function App() {
