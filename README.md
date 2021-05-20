@@ -109,24 +109,16 @@ The application will be created with the following overall architecture and meth
    - Tests will be runnable locally
 10. Deployment to cloud provider
 
-## Development Process, Milestones
+## Getting Started
 
-At every stage of development, the application should be publicly deployed
+- Clone down this repo
+- Create an .env file with the following
 
-1. Phase 1: Application Setup
+```
+REACT_APP_API= <<This will need to be the address to your node API server >>
+REACT_APP_SECRET= <<This is variable will need to match the secret key on the back end server. Used to authenticate a token>>
+```
 
-   - Basic To Do List Management, using Hooks
-
-2. Phase 2: Persistence
-
-   - Implement a custom Form Hook
-   - Implement a custom Ajax Hook
-   - Connect to a live API for storing To Do Items
-
-3. Phase 3: Settings and Global Context
-
-   - Implement user settings for displaying items
-
-4. Phase 4: Authorization
-   - Require a login to access the list
-   - Restrict access to adding, editing, deleting to certain user types
+- See Back End Repo for reference: [Back-End Repository](https://github.com/davee-401-advanced-javascript/authenticated-api-server)
+- Install dependencies : `npm install`
+- Run : `npm start`
