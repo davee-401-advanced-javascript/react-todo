@@ -99,13 +99,42 @@ function Todo() {
     getAll();
   }
 
+  function getSettingsLocalStorage() {
+    if (localStorage.getItem('ToDoApp-Settings')) {
+      try {
+        let settings = JSON.parse(localStorage.getItem('ToDoApp-Settings'));
+        console.log('SETTTINGS:', settings);
+        settingsContext.changeitemsPerScreen(settings.itemsPerScreen);
+        settingsContext.changeDisplayCompleted(settings.displayCompleted);
+        settingsContext.changeDefaultSort(settings.defaultSort);
+      } catch (error) {
+        localStorage.removeItem('ToDoApp-Settings');
+        console.warn('Local Settings Corrupt:', error);
+      }
+    } else {
+      console.log('this was triggered');
+      localStorage.setItem(
+        'ToDoApp-Settings',
+        JSON.stringify({
+          itemsPerScreen: 3,
+          displayCompleted: true,
+          defaultSort: 'difficulty',
+        })
+      );
+      settingsContext.changeitemsPerScreen(3);
+      settingsContext.changeDisplayCompleted(true);
+      settingsContext.changeDefaultSort('difficulty');
+    }
+  }
+
   useEffect(() => {
     document.title = `To Do List: ${active}`;
   }, [active]);
 
   useEffect(() => {
+    getSettingsLocalStorage();
     getAll();
-  }, []);
+  }, [itemList]);
 
   return (
     <>

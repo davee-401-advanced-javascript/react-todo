@@ -4,14 +4,15 @@ import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 
 import './settings-page.scss';
-import { SettingsContext } from '../../context/settings-context.js';
 import useForm from '../form-hook/form-hook.js';
 
 function SettingsPage() {
-  const settingsContext = useContext(SettingsContext);
   const [handleSubmit, handleChange] = useForm(doneWithForm);
 
-  function doneWithForm(formItem) {}
+  function doneWithForm(formItem) {
+    localStorage.setItem('ToDoApp-Settings', JSON.stringify(formItem));
+    document.location.href = '/';
+  }
 
   return (
     <>
@@ -27,7 +28,7 @@ function SettingsPage() {
             onChange={handleChange}
             type="radio"
             label="3"
-            name="displayPerScreen"
+            name="itemsPerScreen"
             value="3"
             defaultChecked
           />
@@ -36,7 +37,7 @@ function SettingsPage() {
             onChange={handleChange}
             type="radio"
             label="5"
-            name="displayPerScreen"
+            name="itemsPerScreen"
             value="5"
           />
           <Form.Check
@@ -44,7 +45,7 @@ function SettingsPage() {
             onChange={handleChange}
             type="radio"
             label="8"
-            name="displayPerScreen"
+            name="itemsPerScreen"
             value="8"
           />
         </Form.Group>
@@ -57,7 +58,7 @@ function SettingsPage() {
             onChange={handleChange}
             type="radio"
             label="YES"
-            name="seeCompletedItems"
+            name="displayCompleted"
             value="true"
             defaultChecked
           />
@@ -66,7 +67,7 @@ function SettingsPage() {
             onChange={handleChange}
             type="radio"
             label="NO"
-            name="seeCompletedItems"
+            name="displayCompleted"
             value="false"
           />
         </Form.Group>
@@ -79,7 +80,7 @@ function SettingsPage() {
             onChange={handleChange}
             type="radio"
             label="Difficulty"
-            name="sortby"
+            name="defaultSort"
             value="difficulty"
             defaultChecked
           />
@@ -88,7 +89,7 @@ function SettingsPage() {
             onChange={handleChange}
             type="radio"
             label="Assignee"
-            name="sortby"
+            name="defaultSort"
             value="assignee"
           />
         </Form.Group>

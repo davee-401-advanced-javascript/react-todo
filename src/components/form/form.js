@@ -19,7 +19,7 @@ function TodoForm({ makePost }) {
 
   return (
     <Auth capability="create">
-      <Form onSubmit={handleSubmit}>
+      <Form className="todo-form" onSubmit={handleSubmit}>
         <h4>Add To Do Item</h4>
 
         <Form.Group controlId="formBasicTask">
