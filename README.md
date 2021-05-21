@@ -1,10 +1,10 @@
 # React - To Do App
 
-## Author: Davee Sok & Ryan Geddes
+## Author: Davee Sok & Ryan Geddes  
 
-https://davees-react-to-do-app.netlify.app/
-username: admin
-password: admin
+https://davees-react-to-do-app.netlify.app/  
+username: admin  
+password: admin   
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/2b317bf0-8bb7-4e19-a9da-b6823036e130/deploy-status)](https://app.netlify.com/sites/davees-react-to-do-app/deploys)
 
