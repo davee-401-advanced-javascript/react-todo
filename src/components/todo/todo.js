@@ -5,6 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { css } from '@emotion/react';
+import MoonLoader from 'react-spinners/MoonLoader';
 
 import { SettingsContext } from '../../context/settings-context.js';
 
@@ -18,6 +20,13 @@ function Todo() {
   const [itemList, setItemList] = useState([]);
   const [active, setActive] = useState(0);
   const settingsContext = useContext(SettingsContext);
+  let [loading, setLoading] = useState(true);
+
+  const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: green;
+  `;
 
   function updateActive(array) {
     let active = array.reduce((acc, item, i) => {
@@ -132,7 +141,7 @@ function Todo() {
 
   useEffect(() => {
     getSettingsLocalStorage();
-    getAll();
+    getAll().then(() => setLoading(false));
   }, []);
 
   return (
@@ -144,6 +153,14 @@ function Todo() {
             <TodoForm makePost={makePost} />
           </Col>
           <Col>
+            <div>
+              <MoonLoader
+                color={'blue'}
+                loading={loading}
+                css={override}
+                size={150}
+              />
+            </div>
             <List
               itemList={itemList}
               makeDelete={makeDelete}
